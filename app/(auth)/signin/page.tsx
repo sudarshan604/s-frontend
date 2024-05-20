@@ -5,40 +5,38 @@ import { z } from "zod";
 
 import TextInput from "@/components/shared/TextInput";
 import { useForm } from "react-hook-form";
+import Form from "@/components/shared/Form";
 
 const schema = z.object({
   email: z.string().email(),
+  password: z.string().min(6),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const Page = () => {
-  // const [email, setEmail] = useState("test@gmail.com");
-  // const [password, setPassword] = useState("*******");
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  console.log("re", register("email"));
-
-  const onSubmit = () => {};
+  const onSubmit = async (data: FormData) => {};
 
   return (
-    <article className="p-4 w-1/2  max-w-xl mx-auto flex flex-col gap-4  border-red-500 border">
-      <div>
-        <p>Sign Up form</p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <TextInput label="Email" name="email" type="text" register={register} />
-        <TextInput label="Password" type="password" register={register} />
-        <button className="bg-purple-500 py-2 text-white" type="submit">
-          Login
-        </button>
-      </form>
-    </article>
+    <Form title="Sign in form" handleSubmit={handleSubmit(onSubmit)}>
+      <TextInput label="Email" name="email" type="text" register={register} />
+      <TextInput
+        label="Password"
+        name="password"
+        type="password"
+        register={register}
+      />
+
+      <button className="bg-purple-500 py-2 text-white" type="submit">
+        Login
+      </button>
+    </Form>
   );
 };
 

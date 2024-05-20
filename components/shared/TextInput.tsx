@@ -11,7 +11,6 @@ interface TextType {
 const TextInput = ({ label, name, type, register, ...props }: TextType) => {
   const generatedId = React.useId();
   const appliedId = generatedId;
-  console.log(props);
   return (
     <div className="flex flex-col">
       <label htmlFor={generatedId}>{label}</label>
