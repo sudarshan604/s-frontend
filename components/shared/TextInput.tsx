@@ -2,14 +2,13 @@
 import React, { ChangeEvent } from "react";
 
 interface TextType {
-  // id?: string | number;
+  name: string;
   label: string;
+  register: any;
   type: "text" | "password";
-  value: string;
-  onchange: (e: ChangeEvent) => void;
 }
 
-const TextInput = ({ label, value, type, onchange, ...props }: TextType) => {
+const TextInput = ({ label, name, type, register, ...props }: TextType) => {
   const generatedId = React.useId();
   const appliedId = generatedId;
   console.log(props);
@@ -20,8 +19,7 @@ const TextInput = ({ label, value, type, onchange, ...props }: TextType) => {
         className="border-gray-500 border px-1 py-1 text-gray-700"
         id={appliedId}
         type={type}
-        value={value}
-        onChange={onchange}
+        {...register(name)}
       />
     </div>
   );

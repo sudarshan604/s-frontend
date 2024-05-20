@@ -13,8 +13,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const Page = () => {
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("*******");
+  // const [email, setEmail] = useState("test@gmail.com");
+  // const [password, setPassword] = useState("*******");
 
   const {
     register,
@@ -27,24 +27,13 @@ const Page = () => {
   const onSubmit = () => {};
 
   return (
-    <article className="p-4 w-1/2  max-w-xl mx-auto flex flex-col gap-4 border-red-500 border">
+    <article className="p-4 w-1/2  max-w-xl mx-auto flex flex-col gap-4  border-red-500 border">
       <div>
         <p>Sign Up form</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <TextInput
-          label="Email"
-          type="text"
-          {...register("email")}
-          onchange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <TextInput
-          label="Password"
-          type="password"
-          onchange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
+        <TextInput label="Email" name="email" type="text" register={register} />
+        <TextInput label="Password" type="password" register={register} />
         <button className="bg-purple-500 py-2 text-white" type="submit">
           Login
         </button>
