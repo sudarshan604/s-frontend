@@ -1,19 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
 import TextInput from "@/components/shared/TextInput";
 import { useForm } from "react-hook-form";
 import Form from "@/components/shared/Form";
-
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-  username: z.string().min(3),
-});
-
-type FormData = z.infer<typeof schema>;
+import { schema, FormData } from "../signin/page";
 
 const Page = () => {
   const {

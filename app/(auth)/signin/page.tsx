@@ -7,12 +7,13 @@ import TextInput from "@/components/shared/TextInput";
 import { useForm } from "react-hook-form";
 import Form from "@/components/shared/Form";
 
-const schema = z.object({
+export const schema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
+  username: z.string().min(6).optional(),
 });
 
-type FormData = z.infer<typeof schema>;
+export type FormData = z.infer<typeof schema>;
 
 const Page = () => {
   const {

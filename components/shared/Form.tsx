@@ -1,7 +1,5 @@
-import { register } from "module";
 import React from "react";
-import TextInput from "./TextInput";
-
+import { BodyBase } from "../typography/BodyBase";
 interface FormInterface {
   children: React.ReactNode;
   title: string;
@@ -12,7 +10,7 @@ const Form = ({ title, children, handleSubmit }: FormInterface) => {
   return (
     <article className="p-4 w-1/2  max-w-xl mx-auto flex flex-col gap-4  border-red-500 border">
       <div>
-        <p>{title}</p>
+        <BodyBase>{title}</BodyBase>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {children}
