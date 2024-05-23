@@ -1,11 +1,12 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { BodyBase } from "../typography/BodyBase";
 
 interface TextType {
   name: string;
   label: string;
   register: any;
+  error?: string;
   type: "text" | "password" | "email";
 }
 
@@ -22,6 +23,7 @@ const TextInput = ({ label, name, type, register, ...props }: TextType) => {
         id={appliedId}
         type={type}
         {...register(name)}
+        {...props}
       />
     </div>
   );

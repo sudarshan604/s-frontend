@@ -10,7 +10,7 @@ import Form from "@/components/shared/Form";
 export const schema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-  username: z.string().min(6).optional(),
+  name: z.string().min(3).optional(),
 });
 
 export type FormData = z.infer<typeof schema>;
