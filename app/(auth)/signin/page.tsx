@@ -1,22 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
 import TextInput from "@/components/shared/TextInput";
 import { useForm } from "react-hook-form";
 import Form from "@/components/shared/Form";
 import { BodyBase } from "@/components/typography/BodyBase";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import apiClients from "@/services/http-service";
+
 export const schema = z.object({
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(6).optional(),
   name: z.string().min(3).optional(),
 });
 
 export type FormData = z.infer<typeof schema>;
 
+const httpService = new apiClients("/auth/signin");
+
 const Page = () => {
+  const { mutate } = useMutation({
+    mutationFn: httpService.create,
+  });
+
   const {
     register,
     handleSubmit,
@@ -24,9 +31,7 @@ const Page = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    await axios.post("http://localhost:5000/api/v1/auth/login", data, {
-      withCredentials: true,
-    });
+    mutate(data);
   };
 
   return (

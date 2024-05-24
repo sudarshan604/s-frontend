@@ -4,17 +4,17 @@ import React from "react";
 import { useEffect } from "react";
 
 const Page = () => {
-  const show = async () => {
+  const handleShowMe = async () => {
     await fetch("http://localhost:5000/api/v1/users/showMe", {
       credentials: "include",
     });
   };
 
-  useEffect(() => {
-    show();
-  }, []);
-
-  return <div>howm</div>;
+  return (
+    <div>
+      <button onClick={handleShowMe}>CLick me</button>
+    </div>
+  );
 };
 
 export default Page;

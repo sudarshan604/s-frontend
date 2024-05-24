@@ -9,9 +9,7 @@ const ThemeSwitcher = () => {
   }, [activeTheme]);
 
   return (
-    <div className="text-se" onClick={() => setActiveTheme("candy")}>
-      ThemeSwitcher
-    </div>
+    <div className="text-se" onClick={() => setActiveTheme("candy")}></div>
   );
 };
 

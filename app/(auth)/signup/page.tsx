@@ -1,25 +1,27 @@
 "use client";
-import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import TextInput from "@/components/shared/TextInput";
-import { useForm } from "react-hook-form";
 import Form from "@/components/shared/Form";
-import { schema, FormData } from "../signin/page";
+import TextInput from "@/components/shared/TextInput";
 import { BodyBase } from "@/components/typography/BodyBase";
+import apiClients from "@/services/http-service";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { FormData, schema } from "../signin/page";
+
+const httpService = new apiClients<any>("/auth/register");
 
 const Page = () => {
+  const { mutate } = useMutation({
+    mutationFn: httpService.create,
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  console.log(errors);
   const onSubmit = async (data: FormData) => {
-    axios.post("http://localhost:5000/api/v1/auth/register", data, {
-      withCredentials: true,
-    });
+    mutate(data);
   };
 
   return (
