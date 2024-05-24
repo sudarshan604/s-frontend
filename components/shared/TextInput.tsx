@@ -7,7 +7,7 @@ interface TextType {
   label: string;
   register: any;
   error?: string;
-  type: "text" | "password" | "email";
+  type: "text" | "password" | "email" | "checkbox";
 }
 
 const TextInput = ({ label, name, type, register, ...props }: TextType) => {

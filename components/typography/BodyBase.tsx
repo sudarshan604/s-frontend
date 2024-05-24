@@ -20,5 +20,9 @@ export const BodyBase: React.FC<DefaultProps> = ({
 }) => {
   const BodyBase = type;
 
-  return <BodyBase {...props}>{children}</BodyBase>;
+  return (
+    <BodyBase className={className} {...props}>
+      {children}
+    </BodyBase>
+  );
 };

@@ -1,5 +1,8 @@
 import type { Config } from "tailwindcss";
 
+const multiThemePlugin = require("./theme/multi-theme-plujin.cjs");
+const themes = require("./theme/theme.json");
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,9 +10,6 @@ const config: Config = {
     "./templates/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  plugins: [multiThemePlugin({ colorThemes: themes })],
 };
 export default config;
