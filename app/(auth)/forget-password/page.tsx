@@ -8,6 +8,8 @@ import { FormData } from "../signin/page";
 import Form from "@/components/shared/Form";
 import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
+import Button from "@/components/Button";
+import { BodyBase } from "@/components/typography/BodyBase";
 
 const httpService = new apiClients("/auth/forget-password");
 
@@ -25,10 +27,26 @@ const Page = () => {
     mutate(data);
   };
   return (
-    <Form title="Reset password" handleSubmit={handleSubmit(onSubmit)}>
-      <TextInput label="email" name="email" type="email" register={register} />
-      <button type="submit">submit</button>
-    </Form>
+    <section className="min-w-full bg-primary-100">
+      <Form
+        title="Reset password"
+        className="item-center py-8 px-6 shadow-custom w-11/12 max-w-[500px]"
+        handleSubmit={handleSubmit(onSubmit)}
+      >
+        <TextInput
+          label="email"
+          name="email"
+          type="email"
+          register={register}
+        />
+        <Button impact="bold" tone="default" shape="rounded" size="large">
+          Get Reset Password Link
+        </Button>
+        <BodyBase className="self-end text-center" fontWeight="bold">
+          Already a have an account ? <a href="/signin">Log In</a>
+        </BodyBase>
+      </Form>
+    </section>
   );
 };
 

@@ -14,12 +14,17 @@ const TextInput = ({ label, name, type, register, ...props }: TextType) => {
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (
-    <div className="flex flex-col">
-      <BodyBase type="label" htmlFor={generatedId}>
+    <div className="flex flex-col gap-y-[10px]">
+      <BodyBase
+        fontWeight="regular"
+        type="label"
+        htmlFor={generatedId}
+        className="text-sm"
+      >
         {label}
       </BodyBase>
       <input
-        className="border-gray-500 border px-1 py-1 text-gray-700"
+        className="border px-1 text-gray-700 p-3 rounded-md shadow-default"
         id={appliedId}
         type={type}
         {...register(name)}

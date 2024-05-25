@@ -2,8 +2,9 @@ import * as React from "react";
 
 type HeadingProps = {
   level?: 1 | 2 | 3 | 4 | 5;
-  className?: React.ReactNode;
-  FontSize: "heading1" | "heading2" | "heading3" | "heading4";
+  children: React.ReactNode;
+  className?: string;
+  FontSize?: "heading1" | "heading2" | "heading3" | "heading4";
 };
 
 export const Heading: React.FC<HeadingProps> = ({
@@ -11,7 +12,6 @@ export const Heading: React.FC<HeadingProps> = ({
   children,
   className,
 }) => {
-  //   const heading = `h${level}` as React.ElementType;
-  const Heading = level;
+  const Heading = `h${level}` as React.ElementType;
   return <Heading className={className}>{children}</Heading>;
 };

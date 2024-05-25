@@ -10,6 +10,12 @@ const config: Config = {
     "./templates/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  theme: {
+    boxShadow: {
+      default: "inset 0 2px 2px rgba(0,0,0,.1)",
+      custom: "0 15px 25px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05)",
+    },
+  },
   plugins: [multiThemePlugin({ colorThemes: themes })],
 };
 export default config;

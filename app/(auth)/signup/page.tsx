@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { FormData, schema } from "../signin/page";
+import Button from "@/components/Button";
 
 const httpService = new apiClients<any>("/auth/register");
 
@@ -25,8 +26,12 @@ const Page = () => {
   };
 
   return (
-    <section className="bg-primary-700">
-      <Form title="Sign Up form" handleSubmit={handleSubmit(onSubmit)}>
+    <section className="bg-primary-50 relative min-h-lvh">
+      <Form
+        title="Sign Up form"
+        className="flex flex-col gap-y-[24px] border rounded-md w-1/3 px-6 py-8 shadow-custom  bg-white item-center"
+        handleSubmit={handleSubmit(onSubmit)}
+      >
         <TextInput
           label="username"
           name="name"
@@ -42,10 +47,16 @@ const Page = () => {
           register={register}
         />
 
-        <button className="bg-primary-50 py-2 text-white" type="submit">
-          Sign Up
-        </button>
-        <BodyBase>Already had account ? signin</BodyBase>
+        <Button impact="bold" tone="default" shape="rounded" size="large">
+          Sign UP
+        </Button>
+        <BodyBase fontWeight="regular" className="">
+          Already had account ?
+          <a className="font-semibold text-primary-600" href="/signin">
+            {"  "}
+            signin
+          </a>
+        </BodyBase>
       </Form>
     </section>
   );

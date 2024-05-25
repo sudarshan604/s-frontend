@@ -1,15 +1,12 @@
 // import * as React from "react";
-// import styled from "styled-components";
 
-// import { Header, HeaderComponent } from "../components/Header/Header";
 // import { Footer } from "../components/Footer/Footer";
-
-// const Container = styled.div`
-//   min-height: calc(100vh - 200px);
-// `;
+// import Header from "@/components/Header/Header";
+// import { Container } from "postcss";
 
 // type PageTemplateProps = {
 //   type?: "default" | "sticky-header" | "basic";
+//   children: React.ReactNode;
 // };
 
 // export const PageTemplate: React.FC<PageTemplateProps> = ({

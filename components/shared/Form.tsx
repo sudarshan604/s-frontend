@@ -1,16 +1,28 @@
 import React from "react";
 import { BodyBase } from "../typography/BodyBase";
+import { cx } from "@/utils";
 interface FormInterface {
   children: React.ReactNode;
   title: string;
+  className?: string;
   handleSubmit: () => void;
 }
 
-const Form = ({ title, children, handleSubmit }: FormInterface) => {
+const Form = ({
+  title,
+  children,
+  handleSubmit,
+  className = "",
+}: FormInterface) => {
   return (
-    <article className="p-4 w-1/2  max-w-xl mx-auto flex flex-col gap-4  border-red-500 border">
+    <article className={cx(className)}>
       <div>
-        <BodyBase>{title}</BodyBase>
+        <BodyBase
+          fontWeight="regular"
+          className="text-center font-semibold text-lg uppercase"
+        >
+          {title}
+        </BodyBase>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {children}

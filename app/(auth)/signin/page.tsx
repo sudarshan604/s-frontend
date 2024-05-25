@@ -8,6 +8,7 @@ import Form from "@/components/shared/Form";
 import { BodyBase } from "@/components/typography/BodyBase";
 import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
+import Button from "@/components/Button";
 
 export const schema = z.object({
   email: z.string().email(),
@@ -35,24 +36,28 @@ const Page = () => {
   };
 
   return (
-    <Form title="Sign in form" handleSubmit={handleSubmit(onSubmit)}>
+    <Form
+      title="Sign in form"
+      className="flex flex-col gap-y-[20px] border rounded-md w-1/3 mx-auto px-6 py-8 shadow-custom item-center"
+      handleSubmit={handleSubmit(onSubmit)}
+    >
       <TextInput label="Email" name="email" type="text" register={register} />
 
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-3">
         <TextInput
           label="Password"
           name="password"
           type="password"
           register={register}
         />
-        <BodyBase className="self-end">
+        <BodyBase className="self-end" fontWeight="bold">
           <a href="/forget-password">Forget your Password?</a>
         </BodyBase>
       </div>
 
-      <button className="bg-purple-500 py-2 text-white" type="submit">
+      <Button impact="bold" tone="default" shape="rounded" size="large">
         Login
-      </button>
+      </Button>
     </Form>
   );
 };

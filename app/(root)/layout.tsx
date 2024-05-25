@@ -7,7 +7,9 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      {children}
+      <section className="h-[calc(100vh-100px)] min-h-[calc(100vh-100px)]  border">
+        {children}
+      </section>
     </>
   );
 }
