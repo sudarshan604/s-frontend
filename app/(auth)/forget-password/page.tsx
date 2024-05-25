@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
 import Button from "@/components/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
+import Link from "next/link";
 
 const httpService = new apiClients("/auth/forget-password");
 
@@ -43,7 +44,7 @@ const Page = () => {
           Get Reset Password Link
         </Button>
         <BodyBase className="self-end text-center" fontWeight="bold">
-          Already a have an account ? <a href="/signin">Log In</a>
+          Already a have an account ? <Link href="/signin">Log In</Link>
         </BodyBase>
       </Form>
     </section>

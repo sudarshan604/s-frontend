@@ -9,6 +9,7 @@ import { BodyBase } from "@/components/typography/BodyBase";
 import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 export const schema = z.object({
   email: z.string().email(),
@@ -51,7 +52,7 @@ const Page = () => {
           register={register}
         />
         <BodyBase className="self-end" fontWeight="bold">
-          <a href="/forget-password">Forget your Password?</a>
+          <Link href="/forget-password">Forget your Password?</Link>
         </BodyBase>
       </div>
 

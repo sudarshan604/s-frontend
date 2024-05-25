@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { FormData, schema } from "../signin/page";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 const httpService = new apiClients<any>("/auth/register");
 
@@ -52,10 +53,10 @@ const Page = () => {
         </Button>
         <BodyBase fontWeight="regular" className="">
           Already had account ?
-          <a className="font-semibold text-primary-600" href="/signin">
+          <Link className="font-semibold text-primary-600" href="/signin">
             {"  "}
             signin
-          </a>
+          </Link>
         </BodyBase>
       </Form>
     </section>
