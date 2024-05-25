@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const FaceBookLogin = () => {
+const useFaceBookLogin = () => {
   const [facebookAccessToken, setFacebookAccessToken] = React.useState({
     accessToken: "",
     facebookUserId: "",
@@ -35,15 +35,7 @@ const FaceBookLogin = () => {
       }
     );
   };
-
-  return (
-    <div>
-      <button onClick={loginWithFacebook}>Login with Facebook</button>
-      {isUserLoginClick && !facebookAccessToken.accessToken && (
-        <p>Login in progress...</p>
-      )}
-    </div>
-  );
+  return { loginWithFacebook };
 };
 
-export default FaceBookLogin;
+export default useFaceBookLogin;

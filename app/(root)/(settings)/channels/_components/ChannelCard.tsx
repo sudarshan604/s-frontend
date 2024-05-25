@@ -1,13 +1,14 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+import Button from "@/components/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
 import { Heading } from "@/components/typography/Heading";
-import Button from "@/components/Button";
+import Image from "next/image";
 
 interface CardProps {
   label: string;
   icon: string;
   description: string;
+  onLogin: () => void;
 }
 
 const ChannelCard = (item: CardProps) => {
@@ -24,7 +25,13 @@ const ChannelCard = (item: CardProps) => {
         </BodyBase>
       </div>
       <div className="">
-        <Button impact="bold" tone="default" shape="square" size="medium">
+        <Button
+          onClick={item.onLogin}
+          impact="bold"
+          tone="default"
+          shape="square"
+          size="medium"
+        >
           Connect
         </Button>
       </div>
