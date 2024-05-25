@@ -10,7 +10,15 @@ interface TextType {
   type: "text" | "password" | "email" | "checkbox";
 }
 
-const TextInput = ({ label, name, type, register, ...props }: TextType) => {
+const TextInput = ({
+  label,
+  name,
+  type,
+  register,
+  error,
+  ...props
+}: TextType) => {
+  console.log(error);
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (
@@ -19,7 +27,7 @@ const TextInput = ({ label, name, type, register, ...props }: TextType) => {
         fontWeight="regular"
         type="label"
         htmlFor={generatedId}
-        className="text-sm"
+        className="text-sm capitalize"
       >
         {label}
       </BodyBase>
@@ -30,6 +38,11 @@ const TextInput = ({ label, name, type, register, ...props }: TextType) => {
         {...register(name)}
         {...props}
       />
+      {error && (
+        <BodyBase type="p" fontWeight="regular" className="text-red-500">
+          {error}
+        </BodyBase>
+      )}
     </div>
   );
 };

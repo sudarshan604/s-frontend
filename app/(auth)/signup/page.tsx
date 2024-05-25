@@ -38,14 +38,22 @@ const Page = () => {
           name="name"
           type="text"
           register={register}
+          error={errors.name && errors.name.message}
         />
 
-        <TextInput label="Email" name="email" type="text" register={register} />
+        <TextInput
+          error={errors.email && errors.email.message}
+          label="Email"
+          name="email"
+          type="text"
+          register={register}
+        />
         <TextInput
           label="Password"
           name="password"
           type="password"
           register={register}
+          error={errors.password && errors.password.message}
         />
 
         <Button impact="bold" tone="default" shape="rounded" size="large">

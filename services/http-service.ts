@@ -15,7 +15,3 @@ export default class HttpService<T> {
     return apiClients.get<T[]>(this.endpoint);
   };
 }
-
-// const create = (endpoint: string) => new HttpService(endpoint);
-
-// export default create;

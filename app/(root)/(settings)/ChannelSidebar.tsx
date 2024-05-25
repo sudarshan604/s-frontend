@@ -1,18 +1,22 @@
 import React from "react";
 import { Heading } from "@/components/typography/Heading";
+import Link from "next/link";
 
 const sidebarLink = [
   {
     label: "Account",
     logo: "",
+    href: "/account",
   },
   {
     label: "Channels",
     logo: "",
+    href: "/channels",
   },
   {
     label: "Connect Channels",
     logo: "",
+    href: "/connectedchannels",
   },
 ];
 
@@ -26,9 +30,9 @@ const ChannelSidebar = () => {
         {sidebarLink.map((item) => {
           return (
             <li key={item.label}>
-              <a href="$">
+              <Link href={item.href}>
                 <Heading level={3}>{item.label}</Heading>
-              </a>
+              </Link>
             </li>
           );
         })}

@@ -2,8 +2,8 @@ import { HeaderLinks } from "@/types";
 
 export const headerLinks: HeaderLinks[] = [
   {
-    route: "/publish",
-    label: "Publish",
+    route: "/account",
+    label: "Account",
   },
   {
     route: "/engage",

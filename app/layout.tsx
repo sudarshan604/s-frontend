@@ -4,6 +4,7 @@ import "./globals.css";
 import QueryClientProvider from "./QueryClientProvider";
 import ThemeSwitcher from "@/components/theme-switcher";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import FacebookSDK from "@/lib/FaceSdk";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <QueryClientProvider>
+          <FacebookSDK />
           <ThemeSwitcher />
           <ReactQueryDevtools />
           <main>{children}</main>

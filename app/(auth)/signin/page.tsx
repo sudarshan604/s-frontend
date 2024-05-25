@@ -11,6 +11,10 @@ import apiClients from "@/services/http-service";
 import Button from "@/components/Button";
 import Link from "next/link";
 
+interface UserInterface {
+  user: { name: string; userId: string };
+}
+
 export const schema = z.object({
   email: z.string().email(),
   password: z.string().min(6).optional(),
@@ -42,7 +46,13 @@ const Page = () => {
       className="flex flex-col gap-y-[20px] border rounded-md w-1/3 mx-auto px-6 py-8 shadow-custom item-center"
       handleSubmit={handleSubmit(onSubmit)}
     >
-      <TextInput label="Email" name="email" type="text" register={register} />
+      <TextInput
+        label="Email"
+        error={errors.email && errors.email.message}
+        name="email"
+        type="text"
+        register={register}
+      />
 
       <div className="flex flex-col gap-y-3">
         <TextInput
@@ -50,6 +60,7 @@ const Page = () => {
           name="password"
           type="password"
           register={register}
+          error={errors.password && errors.password.message}
         />
         <BodyBase className="self-end" fontWeight="bold">
           <Link href="/forget-password">Forget your Password?</Link>

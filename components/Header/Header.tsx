@@ -2,6 +2,7 @@ import React from "react";
 import { headerLinks } from "@/constant/constant";
 import { HeaderLinks } from "@/types";
 import { BodyBase } from "../typography/BodyBase";
+import Link from "next/link";
 const Header = () => {
   return (
     <nav className="py-6 px-10 bg-primary-200 h-[100px] flex justify-between ">
@@ -12,7 +13,7 @@ const Header = () => {
         {headerLinks.map((item: HeaderLinks) => {
           return (
             <ol key={item.label + item.route}>
-              <a href="#">{item.label}</a>
+              <Link href={item.route}>{item.label}</Link>
             </ol>
           );
         })}

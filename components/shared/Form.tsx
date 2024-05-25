@@ -3,7 +3,7 @@ import { BodyBase } from "../typography/BodyBase";
 import { cx } from "@/utils";
 interface FormInterface {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   className?: string;
   handleSubmit: () => void;
 }
