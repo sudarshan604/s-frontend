@@ -23,7 +23,7 @@ export const schema = z.object({
 
 export type FormData = z.infer<typeof schema>;
 
-const httpService = new apiClients("/auth/signin");
+const httpService = new apiClients("/auth/login");
 
 const Page = () => {
   const { mutate } = useMutation({

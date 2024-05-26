@@ -3,11 +3,9 @@ import React from "react";
 import ChannelSidebar from "../ChannelSidebar";
 import ChannelCard from "./_components/ChannelCard";
 import useFaceBookLogin from "@/hooks/useFacebookLogin";
-import useInstagramLogin from "@/hooks/useInstagramLogin";
 
 const Page = () => {
-  const { loginWithFacebook } = useFaceBookLogin();
-  const { loginInstagram } = useInstagramLogin();
+  const { loginWithFacebook, facebookLoginDialog } = useFaceBookLogin();
 
   const socialMedia = [
     {
@@ -20,13 +18,13 @@ const Page = () => {
       label: "Instagram",
       icon: "/assets/images/instagram.png",
       description: "Business or Creator accounts",
-      onLogin: loginInstagram,
+      onLogin: facebookLoginDialog,
     },
     {
       label: "YouTube",
       icon: "/assets/images/youtube.png",
       description: "Channel",
-      onLogin: loginInstagram,
+      onLogin: () => {},
     },
     {
       label: "TikTok",

@@ -5,6 +5,8 @@ import QueryClientProvider from "./QueryClientProvider";
 import ThemeSwitcher from "@/components/theme-switcher";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FacebookSDK from "@/lib/FaceSdk";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider>
-          <FacebookSDK />
-          <ThemeSwitcher />
-          <ReactQueryDevtools />
-          <main>{children}</main>
-        </QueryClientProvider>
+        <GoogleOAuthProvider clientId="767357925688-m0cj63gqp1evmf0qj0e73m3oh1t629mu.apps.googleusercontent.com">
+          <QueryClientProvider>
+            <FacebookSDK />
+            <ThemeSwitcher />
+            <ReactQueryDevtools />
+            <main>{children}</main>
+          </QueryClientProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
