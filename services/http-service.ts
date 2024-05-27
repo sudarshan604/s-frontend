@@ -11,7 +11,7 @@ export default class HttpService<T> {
   update = () => {
     return apiClients.patch<T[]>(this.endpoint);
   };
-  all = () => {
-    return apiClients.get<T[]>(this.endpoint);
+  get = () => {
+    return apiClients.get<T[]>(this.endpoint).then((res) => res.data);
   };
 }

@@ -18,8 +18,11 @@ const useFaceBookLogin = () => {
         if (response.status === "connected") {
           const accessToken = response.authResponse.accessToken;
           const facebookUserId = response.authResponse.userID;
-          console.log(response.authResponse);
-          mutate(response.authResponse);
+
+          mutate({
+            accessToken,
+            userId: facebookUserId,
+          });
         } else {
           setUserLoginClick(false);
         }
