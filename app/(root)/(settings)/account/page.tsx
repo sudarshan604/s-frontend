@@ -10,8 +10,9 @@ import Button from "@/components/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
 import Link from "next/link";
 import { schema } from "@/app/(auth)/signin/page";
+import { FormData } from "@/app/(auth)/signin/page";
 
-const httpService = new apiClients("/auth/forget-password");
+const httpService = new apiClients("/users/update-password");
 
 const Page = () => {
   const { mutate } = useMutation({
@@ -24,6 +25,7 @@ const Page = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FormData) => {
+    console.log("data=", data);
     mutate(data);
   };
   return (
@@ -33,16 +35,31 @@ const Page = () => {
         handleSubmit={handleSubmit(onSubmit)}
       >
         <TextInput
-          label="password"
-          name="password"
+          label="oldPassword"
+          name="oldPassword"
           type="password"
           register={register}
+          error={errors.password && errors.password.message}
+        />
+
+        <TextInput
+          label="NewPassword"
+          name="NewPassword"
+          type="password"
+          register={register}
+          error={errors.password && errors.password.message}
         />
         <BodyBase className="self-end text-center" fontWeight="bold">
           Update your password
         </BodyBase>
 
-        <Button impact="bold" tone="default" shape="rounded" size="large">
+        <Button
+          type="submit"
+          impact="bold"
+          tone="default"
+          shape="rounded"
+          size="large"
+        >
           Change Password
         </Button>
       </Form>

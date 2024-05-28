@@ -18,7 +18,7 @@ interface ModalProps {
       label: string;
       action: () => void;
     };
-    confirm: {
+    confirm?: {
       label: string;
       action: () => void;
     };
@@ -103,16 +103,17 @@ const Modal = ({
               </div>
 
               <div className="flex flex-col gap-2 border-t p-4 sm:flex-row-reverse">
-                <Button
-                  tone={tone}
-                  impact={"bold"}
-                  size={"small"}
-                  shape={"square"}
-                  onClick={actions?.confirm.action}
-                >
-                  <span>{actions?.confirm.label}</span>
-                </Button>
-
+                {actions?.confirm && (
+                  <Button
+                    tone={tone}
+                    impact={"bold"}
+                    size={"small"}
+                    shape={"square"}
+                    onClick={actions?.confirm.action}
+                  >
+                    <span>{actions?.confirm.label}</span>
+                  </Button>
+                )}
                 {actions?.cancel && (
                   <Button
                     ref={closeBtnRef}

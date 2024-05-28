@@ -18,7 +18,6 @@ const TextInput = ({
   error,
   ...props
 }: TextType) => {
-  console.log(error);
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (

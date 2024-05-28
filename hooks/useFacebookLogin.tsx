@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import useSave from "./useSave";
 import { useSaveInstaUser, useSaveInstaPost } from "./instaFetch";
-import useFacebookStore from "@/state-management/facebook/facebookStore";
+import useFacebookStore from "@/state-management/facebook/metaStore";
 
 const useFaceBookLogin = () => {
   const { setFacebookCredentials } = useFacebookStore();
@@ -44,39 +44,23 @@ const useFaceBookLogin = () => {
         var accessToken = response.authResponse.accessToken;
         const platform = "facebook";
         setFacebookCredentials(accessToken, userId, platform);
-        fetchPagesAndGroups(accessToken);
       } else if (response.status === "not_authorized") {
-        console.log("not");
+        facebookLoginDialog("facebook");
       } else {
         facebookLoginDialog("facebook");
       }
     });
   };
 
-  const fetchPagesAndGroups = (accessToken: string) => {
+  const fetchPagesAndGroups = () => {
+    let responseData;
     window.FB.api("/me/accounts", function (pagesResponse) {
-      if (pagesResponse && !pagesResponse.error) {
-        displayPages(pagesResponse.data);
-      } else {
-        console.error("Error fetching pages:", pagesResponse.error);
-      }
+      responseData = pagesResponse.data;
+
+      console.log("da=", responseData);
     });
 
-    window.FB.api("/me/groups", function (groupsResponse) {
-      if (groupsResponse && !groupsResponse.error) {
-        displayGroups(groupsResponse.data);
-      } else {
-        console.error("Error fetching groups:", groupsResponse.error);
-      }
-    });
-  };
-
-  const displayPages = (pages) => {
-    console.log("Displaying Pages:", pages);
-  };
-
-  const displayGroups = (groups) => {
-    console.log("Displaying Groups:", groups);
+    return responseData;
   };
 
   useEffect(() => {
@@ -91,7 +75,7 @@ const useFaceBookLogin = () => {
     }
   }, [isuserSave]);
 
-  return { loginWithFacebook, facebookLoginDialog };
+  return { loginWithFacebook, facebookLoginDialog, fetchPagesAndGroups };
 };
 
 export default useFaceBookLogin;
