@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
 import Button from "@/components/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface UserInterface {
   user: { name: string; userId: string };
@@ -26,8 +27,13 @@ export type FormData = z.infer<typeof schema>;
 const httpService = new apiClients("/auth/login");
 
 const Page = () => {
+  const router = useRouter();
+
   const { mutate } = useMutation({
     mutationFn: httpService.create,
+    onSuccess: () => {
+      router.push("/channels");
+    },
   });
 
   const {

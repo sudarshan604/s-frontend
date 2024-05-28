@@ -44,7 +44,6 @@ const PostDisplay = () => {
       },
       []
     );
-
     setInstaPost(post);
   }, [data]);
 

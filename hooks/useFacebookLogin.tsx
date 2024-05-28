@@ -1,30 +1,25 @@
 "use client";
-import React from "react";
-import apiClients from "@/services/http-service";
-import { useMutation } from "@tanstack/react-query";
-
-const httpService = new apiClients("/token/token-save");
+import { useEffect } from "react";
+import useSave from "./useSave";
+import { useSaveInstaUser, useSaveInstaPost } from "./instaFetch";
+import useFacebookStore from "@/state-management/facebook/facebookStore";
 
 const useFaceBookLogin = () => {
-  const [isUserLoginClick, setUserLoginClick] = React.useState(false);
+  const { setFacebookCredentials } = useFacebookStore();
+  const { mutate, isSuccess } = useSave("/platform/token-save");
+  const { mutate: mutateIstaUser, isSuccess: isuserSave } = useSave(
+    "/insta/save-insta-user"
+  );
+  const { mutate: mutateInstaPost } = useSave("/insta/save-insta-post");
 
-  const { mutate } = useMutation({
-    mutationFn: httpService.create,
-  });
-
-  const facebookLoginDialog = () => {
+  const facebookLoginDialog = (socialMedia: string) => {
     window.FB.login(
       function (response) {
         if (response.status === "connected") {
           const accessToken = response.authResponse.accessToken;
-          const facebookUserId = response.authResponse.userID;
-
-          mutate({
-            accessToken,
-            userId: facebookUserId,
-          });
+          const userId = response.authResponse.userID;
+          setFacebookCredentials(accessToken, userId, socialMedia);
         } else {
-          setUserLoginClick(false);
         }
       },
       {
@@ -39,21 +34,21 @@ const useFaceBookLogin = () => {
   };
 
   const loginWithFacebook = () => {
-    setUserLoginClick(true);
     if (!window.FB) {
       console.error("Facebook SDK not loaded");
       return;
     }
     FB.getLoginStatus(function (response) {
       if (response.status === "connected") {
-        var uid = response.authResponse.userID;
+        var userId = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
-        console.log("auth=", uid, accessToken);
+        const platform = "facebook";
+        setFacebookCredentials(accessToken, userId, platform);
         fetchPagesAndGroups(accessToken);
       } else if (response.status === "not_authorized") {
         console.log("not");
       } else {
-        facebookLoginDialog();
+        facebookLoginDialog("facebook");
       }
     });
   };
@@ -83,6 +78,18 @@ const useFaceBookLogin = () => {
   const displayGroups = (groups) => {
     console.log("Displaying Groups:", groups);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      mutateIstaUser({});
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isuserSave) {
+      mutateInstaPost({});
+    }
+  }, [isuserSave]);
 
   return { loginWithFacebook, facebookLoginDialog };
 };

@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
-import ChannelSidebar from "../ChannelSidebar";
+import React, { useEffect } from "react";
 import ChannelCard from "./_components/ChannelCard";
 import useFaceBookLogin from "@/hooks/useFacebookLogin";
+import useFacebookStore from "@/state-management/facebook/facebookStore";
+import { useSavePlatForm } from "@/hooks/instaFetch";
 
 const Page = () => {
   const { loginWithFacebook, facebookLoginDialog } = useFaceBookLogin();
-
+  const { accessToken, platform, userId } = useFacebookStore();
+  const { mutate } = useSavePlatForm();
   const socialMedia = [
     {
       label: "Facebook",
@@ -18,7 +20,7 @@ const Page = () => {
       label: "Instagram",
       icon: "/assets/images/instagram.png",
       description: "Business or Creator accounts",
-      onLogin: facebookLoginDialog,
+      onLogin: () => facebookLoginDialog("instagram"),
     },
     {
       label: "YouTube",
@@ -33,6 +35,16 @@ const Page = () => {
       onLogin: loginWithFacebook,
     },
   ];
+
+  useEffect(() => {
+    if (accessToken && platform == "instagram") {
+      mutate({
+        accessToken: accessToken,
+        userId: userId,
+        platform: platform,
+      });
+    }
+  }, [accessToken]);
 
   return (
     <section className="pt-3 ml-6 flex flex-col min-h-full gap-y-6 border-r">

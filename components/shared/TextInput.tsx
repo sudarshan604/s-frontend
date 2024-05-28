@@ -32,7 +32,7 @@ const TextInput = ({
         {label}
       </BodyBase>
       <input
-        className="border px-1 text-gray-700 p-3 rounded-md shadow-default"
+        className="border px-1 text-gray-700 p-3 rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t"
         id={appliedId}
         type={type}
         {...register(name)}
