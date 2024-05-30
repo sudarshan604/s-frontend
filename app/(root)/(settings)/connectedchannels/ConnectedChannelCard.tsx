@@ -2,7 +2,11 @@
 import Button from "@/components/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
 import { Heading } from "@/components/typography/Heading";
-import { useGetUserPlatForm, UserDocument } from "@/hooks/instaFetch";
+import {
+  useConnectedMedia,
+  useGetUserPlatForm,
+  UserDocument,
+} from "@/hooks/instaFetch";
 import Image from "next/image";
 import React from "react";
 
@@ -14,21 +18,11 @@ interface NewPlatFormInterface {
 
 const ChannelCard = () => {
   const { data } = useGetUserPlatForm();
+  const { data: con } = useConnectedMedia();
 
   let combinedArray: NewPlatFormInterface[] = [];
 
-  data?.forEach((dataObj) => {
-    Object.keys(dataObj).forEach((key) => {
-      if (Array.isArray(dataObj[key])) {
-        dataObj[key].forEach((item) => {
-          combinedArray.push({
-            source: key,
-            ...item,
-          });
-        });
-      }
-    });
-  });
+  console.log("data=", con);
 
   return (
     <>

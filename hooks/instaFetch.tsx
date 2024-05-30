@@ -64,3 +64,11 @@ export const useSavePlatForm = () => {
     },
   });
 };
+
+export const useConnectedMedia = () => {
+  const httpService = new apiClients<any>("/platform/connected-media");
+  return useQuery({
+    queryKey: ["connected-media"],
+    queryFn: httpService.get,
+  });
+};
