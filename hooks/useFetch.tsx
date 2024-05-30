@@ -11,5 +11,16 @@ export const useCurrentUser = () => {
   return useQuery({
     queryKey: ["showMe"],
     queryFn: httpService.get,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useDeleteQuery = () => {
+  const httpService = new apiClients("/auth/logout");
+
+  return useQuery({
+    queryKey: ["delete"],
+    queryFn: () => httpService.delete,
   });
 };

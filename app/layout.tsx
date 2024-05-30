@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <GoogleOAuthProvider clientId="767357925688-m0cj63gqp1evmf0qj0e73m3oh1t629mu.apps.googleusercontent.com">
           <QueryClientProvider>
             <FacebookSDK />

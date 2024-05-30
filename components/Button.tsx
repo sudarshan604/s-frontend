@@ -50,6 +50,7 @@ const shapeClasses: Record<ButtonProps["shape"], string> = {
 const Button = (
   {
     size = "medium",
+    className = "",
     impact = "bold",
     shape = "rounded",
     tone = "default",
@@ -65,7 +66,8 @@ const Button = (
         baseClasses,
         impactClasses[tone][impact],
         sizeClasses[size],
-        shapeClasses[shape]
+        shapeClasses[shape],
+        className
       )}
     />
   );

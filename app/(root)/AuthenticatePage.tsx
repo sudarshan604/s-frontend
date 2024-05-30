@@ -7,21 +7,27 @@ import Header from "@/components/Header/Header";
 const AuthenticatePage = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const { data, isLoading } = useCurrentUser();
+  const { data, isLoading, isFetching } = useCurrentUser();
 
-  if (isLoading) {
+  const minHeightTemplate =
+    pathname !== "/"
+      ? "h-[calc(100vh-100px)] min-h-[calc(100vh-100px)] pt-3 "
+      : "h-[100vh] max-h-[100vh]";
+
+  if (isLoading && isFetching) {
     return <Spinner />;
   }
 
   if (!data) {
-    router.push("/signin");
+    router.push("/");
   }
 
   return (
     <>
-      {pathname !== "/" && <Header />}
-
-      {children}
+      <section className={` ${minHeightTemplate} `}>
+        {pathname !== "/" && <Header />}
+        {children}
+      </section>
     </>
   );
 };

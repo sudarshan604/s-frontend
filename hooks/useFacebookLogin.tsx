@@ -57,7 +57,7 @@ const useFaceBookLogin = () => {
     window.FB.api("/me/accounts", function (pagesResponse) {
       responseData = pagesResponse.data;
 
-      console.log("da=", responseData);
+      console.log("resp data=", responseData);
     });
 
     return responseData;

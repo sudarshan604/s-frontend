@@ -25,6 +25,7 @@ const Page = () => {
       const newPage = pages.filter((item: PageDataInterface) => {
         return item.id === pageId;
       });
+
       mutate({
         accessToken: newPage[0].access_token,
         userId: newPage[0].id,
@@ -40,6 +41,7 @@ const Page = () => {
       icon: "/assets/images/facebook.png",
       description: "Page or Group",
       onLogin: loginWithFacebook,
+      // onLogin: () => facebookLoginDialog("facebook"),
     },
     {
       label: "Instagram",
@@ -62,11 +64,17 @@ const Page = () => {
   ];
 
   const fetchPages = async (acess: string, id: string) => {
+    console.log(acess, id);
     const res = await fetch(
       `https://graph.facebook.com/v20.0/${id}/accounts?access_token=${acess}`
     );
 
+    //graph.facebook.com/v17.0/106033669270099?fields=instagram_business_account&access_token=
+
+    // https:
     const data = await res.json();
+
+    console.log("data=", data);
 
     setPages(data.data);
   };
@@ -90,8 +98,6 @@ const Page = () => {
     }
   }, [pages]);
 
-  const handleConfirm = () => {};
-
   return (
     <>
       <Modal
@@ -109,7 +115,7 @@ const Page = () => {
       >
         <FaceBookPageList closeModal={() => setModelOpen(false)} data={pages} />
       </Modal>
-      <section className="pt-3 ml-6 flex flex-col min-h-full gap-y-6 border-r">
+      <section className="pt-3 ml-6 flex flex-col min-h-full gap-y-6 border-r ">
         {socialMedia.map((item) => {
           return (
             <>

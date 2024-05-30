@@ -1,12 +1,9 @@
-import React from "react";
 import { headerLinks } from "@/constant/constant";
 import { HeaderLinks } from "@/types";
-import { BodyBase } from "../typography/BodyBase";
 import Link from "next/link";
-import Avvvatars from "avvvatars-react";
-import { useCurrentUser } from "@/hooks/useFetch";
+import { BodyBase } from "../typography/BodyBase";
+import UserAvatar from "./UserAvatar";
 const Header = () => {
-  const { data } = useCurrentUser();
   return (
     <nav className="py-6 px-10 bg-white h-[100px] flex items-center shadow-custom justify-between ">
       <Link href={"/"}>
@@ -26,9 +23,7 @@ const Header = () => {
           );
         })}
       </ul>
-      <div>
-        <Avvvatars value={data?.name} />
-      </div>
+      <UserAvatar />
     </nav>
   );
 };

@@ -30,7 +30,6 @@ const ChannelCard = () => {
     });
   });
 
-  console.log(combinedArray);
   return (
     <>
       {(combinedArray ?? []).map((item: NewPlatFormInterface) => {

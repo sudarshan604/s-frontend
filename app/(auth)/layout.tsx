@@ -1,6 +1,4 @@
-"use client";
-import Header from "@/components/Header/Header";
-import AuthenticatePage from "./AuthenticatePage";
+import AuthenticatePage from "./Authenticate";
 export default function RootLayout({
   children,
 }: Readonly<{

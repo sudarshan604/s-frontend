@@ -26,7 +26,7 @@ const PostDetail = ({ id }: { id: string }) => {
     queryKey: ["instapost"],
     queryFn: httpService.get,
   });
-  const accesToken = platfromData?.[0].instagram[0].accessToken;
+  const accesToken = platfromData?.[0]?.instagram[0]?.accessToken;
 
   const fetchPostCommint = async () => {
     const res = await fetch(
@@ -34,6 +34,7 @@ const PostDetail = ({ id }: { id: string }) => {
     );
 
     const { data } = await res.json();
+
     setComments(data);
   };
 
@@ -60,11 +61,9 @@ const PostDetail = ({ id }: { id: string }) => {
   useEffect(() => {
     if (id && platfromData) {
       fetchPostCommint();
-      console.log("plat", data);
     }
   }, [id]);
 
-  console.log("comm=", comments);
   return (
     <article className="border h-full  max-h-full">
       <div className="p-2  flex pb-4 gap-x-6 border-b-gray-200">

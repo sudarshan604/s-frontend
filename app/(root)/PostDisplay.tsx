@@ -50,7 +50,6 @@ const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
     );
     setInstaPost(post);
   }, [data]);
-  console.log("insta=", instaPost);
 
   return (
     <Suspense fallback={<p>..loading</p>}>

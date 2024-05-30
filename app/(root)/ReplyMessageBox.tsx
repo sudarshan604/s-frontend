@@ -51,7 +51,6 @@ const ReplyMessageBox = ({
         },
       });
       const data = await response.json();
-      console.log("reply=", data);
       setRelyMessage("");
     } catch (error) {}
   };
