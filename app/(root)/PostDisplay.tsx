@@ -3,15 +3,16 @@ import apiClients from "@/services/http-service";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-
-interface PostInterface {
+import { Suspense } from "react";
+import PostDisplaySkeleTon from "./PostDisplaySkeleTon";
+export interface PostInterface {
   user: string;
   media: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-interface PostDetailInterface {
+export interface PostDetailInterface {
   comments_count: number;
   id: string;
   like_count: number;
@@ -24,7 +25,7 @@ interface PostDetailInterface {
 
 const httpService = new apiClients<PostInterface>("/insta/get-insta-post");
 
-const PostDisplay = () => {
+const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
   const [instaPost, setInstaPost] = useState();
   const { data, error } = useQuery<any, Error>({
     queryKey: ["instapost"],
@@ -35,7 +36,10 @@ const PostDisplay = () => {
     const post = data?.reduce(
       (acc: PostDetailInterface[], currentValue: PostInterface) => {
         let mediaObject = JSON.parse(currentValue.media);
-        if (mediaObject.media_type === "IMAGE") {
+        if (
+          mediaObject.media_type === "IMAGE" ||
+          mediaObject.media_type === "CAROUSEL_ALBUM"
+        ) {
           acc.push(mediaObject);
 
           return acc;
@@ -46,25 +50,32 @@ const PostDisplay = () => {
     );
     setInstaPost(post);
   }, [data]);
+  console.log("insta=", instaPost);
 
-  console.log(instaPost);
   return (
-    <section className=" grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]  min-h-full">
-      {(instaPost ?? []).map((post: PostDetailInterface) => {
-        return (
-          <Image
-            key={post.id}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "auto", height: "auto" }}
-            src={post.media_url}
-            alt="insta-post"
-          />
-        );
-      })}
-    </section>
+    <Suspense fallback={<p>..loading</p>}>
+      <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border gap-2   min-h-full">
+        {(instaPost ?? []).map((post: PostDetailInterface) => {
+          return (
+            <div
+              key={post.id}
+              className="hover:cursor-pointer border "
+              onClick={() => onClick(post.id)}
+            >
+              <Image
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "auto", height: "100%" }}
+                src={post.media_url}
+                alt="insta-post"
+              />
+            </div>
+          );
+        })}
+      </section>
+    </Suspense>
   );
 };
 
-export default PostDisplay;
+export default React.memo(PostDisplay);

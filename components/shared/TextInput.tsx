@@ -4,10 +4,11 @@ import { BodyBase } from "../typography/BodyBase";
 
 interface TextType {
   name: string;
-  label: string;
+  label?: string;
   register: any;
+  value?: string;
   error?: string;
-  type: "text" | "password" | "email" | "checkbox";
+  type: "text" | "password" | "email" | "checkbox" | "radio";
 }
 
 const TextInput = ({
@@ -16,6 +17,7 @@ const TextInput = ({
   type,
   register,
   error,
+  value,
   ...props
 }: TextType) => {
   const generatedId = React.useId();
@@ -31,6 +33,7 @@ const TextInput = ({
         {label}
       </BodyBase>
       <input
+        value={value}
         className="border px-1 text-gray-700 p-3 rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t"
         id={appliedId}
         type={type}

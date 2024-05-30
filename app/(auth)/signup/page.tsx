@@ -27,7 +27,7 @@ const Page = () => {
   };
 
   return (
-    <section className="bg-primary-50 relative min-h-lvh">
+    <section className="bg-primary-200 relative min-h-lvh">
       <Form
         title="Sign Up form"
         className="flex flex-col gap-y-[24px] border rounded-md w-1/3 px-6 py-8 shadow-custom  bg-white item-center"

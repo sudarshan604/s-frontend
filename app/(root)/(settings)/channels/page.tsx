@@ -3,19 +3,36 @@ import React, { useEffect, useState } from "react";
 import ChannelCard from "./_components/ChannelCard";
 import useFaceBookLogin from "@/hooks/useFacebookLogin";
 import useFacebookStore from "@/state-management/facebook/metaStore";
-import { useSavePlatForm } from "@/hooks/instaFetch";
+import { useSaveInstaUser, useSavePlatForm } from "@/hooks/instaFetch";
 import useFaceBookPages, {
   PageDataInterface,
 } from "@/state-management/facebook/pageStore";
 import Modal from "@/components/Modal";
+
 import FaceBookPageList from "./_components/FaceBookPageList";
 
 const Page = () => {
+  const pageId = useFaceBookPages((s) => s.selectedPageId);
+
   const { loginWithFacebook, facebookLoginDialog } = useFaceBookLogin();
   const { accessToken, platform, userId } = useFacebookStore();
   const { setPages, pages } = useFaceBookPages();
   const { mutate } = useSavePlatForm();
   const [openModel, setModelOpen] = useState(false);
+
+  useEffect(() => {
+    if (pageId) {
+      const newPage = pages.filter((item: PageDataInterface) => {
+        return item.id === pageId;
+      });
+      mutate({
+        accessToken: newPage[0].access_token,
+        userId: newPage[0].id,
+        platform: "facebook",
+        name: newPage[0].name,
+      });
+    }
+  }, [pageId]);
 
   const socialMedia = [
     {
@@ -69,7 +86,6 @@ const Page = () => {
 
   useEffect(() => {
     if (pages) {
-      console.log("");
       setModelOpen(true);
     }
   }, [pages]);
@@ -91,7 +107,7 @@ const Page = () => {
           },
         }}
       >
-        <FaceBookPageList />
+        <FaceBookPageList closeModal={() => setModelOpen(false)} data={pages} />
       </Modal>
       <section className="pt-3 ml-6 flex flex-col min-h-full gap-y-6 border-r">
         {socialMedia.map((item) => {

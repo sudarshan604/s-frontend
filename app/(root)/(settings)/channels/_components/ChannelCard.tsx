@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
 import { Heading } from "@/components/typography/Heading";
-import { useGetUserPlatForm } from "@/hooks/instaFetch";
+import { useGetUserPlatForm, UserDocument } from "@/hooks/instaFetch";
 import useFaceBookPages from "@/state-management/facebook/pageStore";
 import Image from "next/image";
 import React from "react";
@@ -32,6 +32,7 @@ const ChannelCard = (item: CardProps) => {
         </BodyBase>
       </div>
       <div className="">
+        {/* {!data?.[0][lowerCaseLabel] ? ( */}
         <Button
           onClick={item.onLogin}
           impact="bold"
@@ -41,6 +42,11 @@ const ChannelCard = (item: CardProps) => {
         >
           Connect
         </Button>
+        {/* ) : (
+          <BodyBase className="" type="span" fontWeight="regular">
+            Connected
+          </BodyBase>
+        )} */}
       </div>
     </article>
   );

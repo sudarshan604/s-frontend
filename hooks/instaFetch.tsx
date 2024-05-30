@@ -8,11 +8,13 @@ interface MetaCredentialInterface {
   name?: string;
 }
 
-interface UserDocument {
+export interface UserDocument {
   _id: string;
   user: string;
   instagram: MetaCredentialInterface[];
   facebook: MetaCredentialInterface[];
+  youtube: MetaCredentialInterface[];
+  tiktok: MetaCredentialInterface[];
   updatedAt: Date;
   __v: number;
 }
@@ -55,8 +57,10 @@ export const useSavePlatForm = () => {
 
   return useMutation({
     mutationFn: httpService.create,
-    onSuccess: () => {
-      mutate({});
+    onSettled: (data, erro) => {
+      if (data) {
+        mutate({});
+      }
     },
   });
 };

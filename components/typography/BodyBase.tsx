@@ -16,19 +16,31 @@ const WeightClasses: Record<DefaultProps["fontWeight"], string> = {
   medium: "font-semibold",
   regular: "font-normal",
 };
+const FontSizeClasses: Record<DefaultProps["FontSize"], string> = {
+  body: "text-[1.25rem]",
+  bodyS: "text-base",
+  bodyXS: "text-[0.9rem]",
+  bodyXXS: "text-[0.72rem]",
+};
 
 export const BodyBase: React.FC<DefaultProps> = ({
   fontWeight = "regular",
   type = "p",
   color,
   children,
+  FontSize = "bodyS",
   className = "",
   ...props
 }) => {
   const BodyBase = type;
 
   return (
-    <BodyBase className={cx(className, WeightClasses[fontWeight])} {...props}>
+    <BodyBase
+      className={
+        (cx(className, WeightClasses[fontWeight]), FontSizeClasses[FontSize])
+      }
+      {...props}
+    >
       {children}
     </BodyBase>
   );

@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import apiClients from "@/services/http-service";
 
-const useFetch = () => {
-  useQuery({
-    queryKey: [""],
-    queryFn: () => {},
+interface CurrentUserInterdace {
+  user: string;
+}
+
+export const useCurrentUser = () => {
+  const httpService = new apiClients<CurrentUserInterdace>("/users/showMe");
+
+  return useQuery({
+    queryKey: ["showMe"],
+    queryFn: httpService.get,
   });
 };
-
-export default useFetch;

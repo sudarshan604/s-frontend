@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import useFacebookStore, { FacebookInterface } from "./metaStore";
 
 export interface PageDataInterface {
   access_token: string;
@@ -10,12 +9,16 @@ export interface PageDataInterface {
 
 export interface PageInterface {
   pages: PageDataInterface[];
+  selectedPageId: string;
+  setSelectedPageID: (id: string) => void;
   setPages: (pages: []) => void;
 }
 
 const useFaceBookPages = create<PageInterface>((set) => ({
   pages: [],
+  selectedPageId: "",
   setPages: (pages: PageDataInterface[]) => set({ pages }),
+  setSelectedPageID: (id: string) => set({ selectedPageId: id }),
 }));
 
 export default useFaceBookPages;

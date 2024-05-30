@@ -5,7 +5,7 @@ interface FormInterface {
   children: React.ReactNode;
   title?: string;
   className?: string;
-  handleSubmit: () => void;
+  handleSubmit?: () => void;
 }
 
 const Form = ({

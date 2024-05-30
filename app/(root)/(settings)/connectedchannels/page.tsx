@@ -1,7 +1,7 @@
 import React from "react";
-
+import ConnectedChannelCard from "./ConnectedChannelCard";
 const page = () => {
-  return <div>page</div>;
+  return <ConnectedChannelCard />;
 };
 
 export default page;
