@@ -6,7 +6,7 @@ export default class HttpService<T> {
     this.endpoint = endpoint;
   }
   create = (data: T = {} as T) => {
-    return apiClients.post<T[]>(this.endpoint, data);
+    return apiClients.post<T[]>(this.endpoint, data).then((res) => res.data);
   };
   update = () => {
     return apiClients.patch<T[]>(this.endpoint);

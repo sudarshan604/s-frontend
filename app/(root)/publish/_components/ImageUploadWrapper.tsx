@@ -15,9 +15,6 @@ const ImageUpload = () => {
         <h2>account</h2>
       </div>
       <UploadContainer />
-      <footer>
-        <h2>shedule time</h2>
-      </footer>
     </section>
   );
 };

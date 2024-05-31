@@ -64,7 +64,6 @@ const Page = () => {
   ];
 
   const fetchPages = async (acess: string, id: string) => {
-    console.log(acess, id);
     const res = await fetch(
       `https://graph.facebook.com/v20.0/${id}/accounts?access_token=${acess}`
     );
@@ -73,8 +72,6 @@ const Page = () => {
 
     // https:
     const data = await res.json();
-
-    console.log("data=", data);
 
     setPages(data.data);
   };

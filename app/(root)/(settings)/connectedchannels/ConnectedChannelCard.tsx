@@ -22,8 +22,6 @@ const ChannelCard = () => {
 
   let combinedArray: NewPlatFormInterface[] = [];
 
-  console.log("data=", con);
-
   return (
     <>
       {(combinedArray ?? []).map((item: NewPlatFormInterface) => {
