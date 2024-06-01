@@ -20,7 +20,8 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
   const shedule = usePostSchedule();
 
   const handleSelectSlot = (slotInfo: { start: Date }) => {
-    showModel();
+    console.log(slotInfo);
+    // showModel();
     shedule.setScheduleDate({
       start: slotInfo.start as Date,
     });
@@ -76,7 +77,7 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
   );
 
   return (
-    <div className="h-[500px]">
+    <div className="h-[800px]">
       <Calendar
         localizer={localizer}
         events={events}

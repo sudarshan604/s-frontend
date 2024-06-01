@@ -19,6 +19,31 @@ export interface UserDocument {
   __v: number;
 }
 
+export interface InstagramUserInterface {
+  _id: string;
+  user_id: string;
+  follows_count: number;
+  followers_count: number;
+  media_count: number;
+  name: string;
+  profile_picture_url: string;
+  user: string;
+  username: string;
+  biography: string;
+  __v: number;
+}
+
+export const useGetInstaUser = () => {
+  const httpService = new apiClients<InstagramUserInterface>(
+    "/insta/get-insta-user"
+  );
+
+  return useQuery<InstagramUserInterface[]>({
+    queryKey: ["insta-user"],
+    queryFn: httpService.get,
+  });
+};
+
 export const useGetUserPlatForm = () => {
   const httpService = new apiClients<UserDocument>("/platform/user-platform");
 
