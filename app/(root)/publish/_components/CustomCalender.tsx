@@ -21,13 +21,15 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
 
   const handleSelectSlot = (slotInfo: { start: Date }) => {
     console.log(slotInfo);
-    // showModel();
+    showModel();
     shedule.setScheduleDate({
       start: slotInfo.start as Date,
     });
   };
 
   useEffect(() => {
+    const currentDate = moment();
+    console.log(currentDate.toDate());
     if (data) {
       const newdata = data.reduce(
         (acc: SheduleInterface[], currentMedia: SheduleInterface) => {

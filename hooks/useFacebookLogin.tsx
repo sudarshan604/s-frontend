@@ -7,6 +7,7 @@ import useFacebookStore from "@/state-management/facebook/metaStore";
 const useFaceBookLogin = () => {
   const { setFacebookCredentials } = useFacebookStore();
   const { mutate, isSuccess } = useSave("/platform/token-save");
+
   const { mutate: mutateIstaUser, isSuccess: isuserSave } = useSave(
     "/insta/save-insta-user"
   );

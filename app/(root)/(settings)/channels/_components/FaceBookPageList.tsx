@@ -19,6 +19,7 @@ const FaceBookPageList: React.FC<FacebookPageListInterface> = ({
   closeModal,
 }) => {
   const storeSelectedPageId = useFaceBookPages((s) => s.setSelectedPageID);
+
   const schema = z.object({
     selectedPage: z.string(),
   });

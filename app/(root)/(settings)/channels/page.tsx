@@ -67,10 +67,6 @@ const Page = () => {
     const res = await fetch(
       `https://graph.facebook.com/v20.0/${id}/accounts?access_token=${acess}`
     );
-
-    //graph.facebook.com/v17.0/106033669270099?fields=instagram_business_account&access_token=
-
-    // https:
     const data = await res.json();
 
     setPages(data.data);

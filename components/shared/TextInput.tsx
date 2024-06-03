@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { BodyBase } from "../typography/BodyBase";
+import { cx } from "@/utils";
 
 interface TextType {
   name: string;
@@ -20,10 +21,18 @@ const TextInput = ({
   value,
   ...props
 }: TextType) => {
+  const typeClasses: Record<TextType["type"], string> = {
+    radio: "w-2 flex",
+    text: "",
+    password: "",
+    email: "",
+    checkbox: "",
+  };
+
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (
-    <div className="flex flex-col gap-y-[10px]">
+    <div className={cx("flex flex-col gap-y-[10px]", typeClasses[type])}>
       <BodyBase
         fontWeight="regular"
         type="label"
@@ -34,7 +43,10 @@ const TextInput = ({
       </BodyBase>
       <input
         value={value}
-        className="border px-1 text-gray-700 p-3 rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t"
+        className={cx(
+          "border px-1 text-gray-700 p-3 w-2 rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t",
+          typeClasses[type]
+        )}
         id={appliedId}
         type={type}
         {...register(name)}
