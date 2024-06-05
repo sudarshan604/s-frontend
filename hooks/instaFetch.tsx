@@ -1,7 +1,7 @@
 import apiClients from "@/services/http-service";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-interface MetaCredentialInterface {
+export interface MetaCredentialInterface {
   accessToken: string;
   userId: string;
   platform?: string;
@@ -75,6 +75,7 @@ export const useSaveInstaPost = () => {
 
 export const useSavePlatForm = () => {
   const { mutate } = useSaveInstaUser();
+  const queryClient = useQueryClient();
 
   const httpService = new apiClients<MetaCredentialInterface>(
     "/platform/token-save"
@@ -82,9 +83,14 @@ export const useSavePlatForm = () => {
 
   return useMutation({
     mutationFn: httpService.create,
-    onSettled: (data, erro) => {
-      if (data) {
+    onSettled: (savedData, erro) => {
+      if (savedData) {
         mutate({});
+
+        // queryClient.setQueryData<UserDocument>(["platform"], (platforms) => [
+        //   savedData,
+        //   ...platforms,
+        // ]);
       }
     },
   });

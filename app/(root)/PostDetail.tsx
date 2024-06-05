@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { PostDetailInterface, PostInterface } from "./PostDisplay";
 import Image from "next/image";
 import { BodyBase } from "@/components/typography/BodyBase";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import Icon from "@/assets";
 import { useGetUserPlatForm } from "@/hooks/instaFetch";
 import ReplyMessageBox from "./ReplyMessageBox";

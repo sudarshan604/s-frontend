@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { FormData, schema } from "../signin/page";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import Link from "next/link";
 
 const httpService = new apiClients<any>("/auth/register");

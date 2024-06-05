@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UploadImage from "./UploadImage";
 import usePostShedule from "@/state-management/facebook/postSheduleStore";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 const UploadContainer = () => {
   const [uploadFile, setImages] = React.useState<
     {

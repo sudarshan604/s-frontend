@@ -21,18 +21,10 @@ const TextInput = ({
   value,
   ...props
 }: TextType) => {
-  const typeClasses: Record<TextType["type"], string> = {
-    radio: "w-2 flex",
-    text: "",
-    password: "",
-    email: "",
-    checkbox: "",
-  };
-
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (
-    <div className={cx("flex flex-col gap-y-[10px]", typeClasses[type])}>
+    <div className={cx("flex flex-col gap-y-[10px]")}>
       <BodyBase
         fontWeight="regular"
         type="label"
@@ -41,11 +33,11 @@ const TextInput = ({
       >
         {label}
       </BodyBase>
+
       <input
         value={value}
         className={cx(
-          "border px-1 text-gray-700 p-3 w-2 rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t",
-          typeClasses[type]
+          "border px-1 text-gray-700 p-3  rounded-md outline-primary-500 outline-4 outline-offset-2 shadow-default t"
         )}
         id={appliedId}
         type={type}

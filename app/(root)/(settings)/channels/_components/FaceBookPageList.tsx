@@ -7,8 +7,7 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Button from "@/components/Button";
-
+import Button from "@/components/shared/Button";
 interface FacebookPageListInterface {
   closeModal: () => void;
   data: PageDataInterface[];

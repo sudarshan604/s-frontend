@@ -8,7 +8,7 @@ import Form from "@/components/shared/Form";
 import { BodyBase } from "@/components/typography/BodyBase";
 import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

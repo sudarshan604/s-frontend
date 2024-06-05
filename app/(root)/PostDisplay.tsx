@@ -3,7 +3,6 @@ import apiClients from "@/services/http-service";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Suspense } from "react";
 import PostDisplaySkeleTon from "./PostDisplaySkeleTon";
 export interface PostInterface {
   user: string;
@@ -52,28 +51,26 @@ const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
   }, [data]);
 
   return (
-    <Suspense fallback={<p>..loading</p>}>
-      <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border gap-2   min-h-full">
-        {(instaPost ?? []).map((post: PostDetailInterface) => {
-          return (
-            <div
-              key={post.id}
-              className="hover:cursor-pointer border "
-              onClick={() => onClick(post.id)}
-            >
-              <Image
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: "auto", height: "100%" }}
-                src={post.media_url}
-                alt="insta-post"
-              />
-            </div>
-          );
-        })}
-      </section>
-    </Suspense>
+    <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  gap-2   min-h-full">
+      {(instaPost ?? []).map((post: PostDetailInterface) => {
+        return (
+          <div
+            key={post.id}
+            className="hover:cursor-pointer  "
+            onClick={() => onClick(post.id)}
+          >
+            <Image
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "auto", height: "100%" }}
+              src={post.media_url}
+              alt="insta-post"
+            />
+          </div>
+        );
+      })}
+    </section>
   );
 };
 

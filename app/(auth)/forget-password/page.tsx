@@ -8,7 +8,7 @@ import { FormData } from "../signin/page";
 import Form from "@/components/shared/Form";
 import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import { BodyBase } from "@/components/typography/BodyBase";
 import Link from "next/link";
 

@@ -7,9 +7,9 @@ import { useSaveInstaUser, useSavePlatForm } from "@/hooks/instaFetch";
 import useFaceBookPages, {
   PageDataInterface,
 } from "@/state-management/facebook/pageStore";
-import Modal from "@/components/Modal";
-
+import Modal from "@/components/shared/Modal";
 import FaceBookPageList from "./_components/FaceBookPageList";
+import { useSavePlatFormfacebook } from "@/hooks/facebookapi";
 
 const Page = () => {
   const pageId = useFaceBookPages((s) => s.selectedPageId);
@@ -19,6 +19,7 @@ const Page = () => {
   const { setPages, pages } = useFaceBookPages();
   const { mutate } = useSavePlatForm();
   const [openModel, setModelOpen] = useState(false);
+  const { mutate: saveFacebookToken } = useSavePlatFormfacebook();
 
   useEffect(() => {
     if (pageId) {
@@ -26,7 +27,7 @@ const Page = () => {
         return item.id === pageId;
       });
 
-      mutate({
+      saveFacebookToken({
         accessToken: newPage[0].access_token,
         userId: newPage[0].id,
         platform: "facebook",
