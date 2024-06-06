@@ -1,13 +1,18 @@
 import apiClients from "@/services/http-service";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { PostDetailInterface, PostInterface } from "./PostDisplay";
+import {
+  filterfacebookPost,
+  PostDetailInterface,
+  PostInterface,
+} from "./PostDisplay";
 import Image from "next/image";
 import { BodyBase } from "@/components/typography/BodyBase";
 import Button from "@/components/shared/Button";
 import Icon from "@/assets";
 import { useGetUserPlatForm } from "@/hooks/instaFetch";
 import ReplyMessageBox from "./ReplyMessageBox";
+import { PagePostInterface, useGetfacebookPagePost } from "@/hooks/facebookapi";
 
 const httpService = new apiClients<PostInterface>("/insta/get-insta-post");
 
@@ -17,8 +22,17 @@ export interface CommentInterface {
   username?: string;
 }
 
-const PostDetail = ({ id }: { id: string }) => {
-  const [post, setPost] = useState<PostDetailInterface>();
+const PostDetail = ({
+  postId,
+  platform,
+}: {
+  postId: string;
+  platform: string;
+}) => {
+  const [post, setPost] = useState<
+    PostDetailInterface | { id: string; media_url: string }
+  >();
+
   const { data: platfromData } = useGetUserPlatForm();
   const [comments, setComments] = useState<CommentInterface[]>([]);
 
@@ -26,11 +40,13 @@ const PostDetail = ({ id }: { id: string }) => {
     queryKey: ["instapost"],
     queryFn: httpService.get,
   });
+  const { data: fbPostData } = useGetfacebookPagePost();
+
   const accesToken = platfromData?.[0]?.instagram[0]?.accessToken;
 
   const fetchPostCommint = async () => {
     const res = await fetch(
-      `https://graph.facebook.com/${id}/comments?access_token=${accesToken}`
+      `https://graph.facebook.com/${postId}/comments?access_token=${accesToken}`
     );
 
     const { data } = await res.json();
@@ -39,30 +55,41 @@ const PostDetail = ({ id }: { id: string }) => {
   };
 
   useEffect(() => {
-    const post = data?.reduce(
-      (acc: PostDetailInterface[], currentValue: PostInterface) => {
-        let mediaObject = JSON.parse(currentValue.media);
-        if (
-          (mediaObject.media_type === "IMAGE" ||
-            mediaObject.media_type === "CAROUSEL_ALBUM") &&
-          mediaObject.id === id
-        ) {
-          acc.push(mediaObject);
+    if (platform === "instagram") {
+      const post = data?.reduce(
+        (acc: PostDetailInterface[], currentValue: PostInterface) => {
+          let mediaObject = JSON.parse(currentValue.media);
+          if (
+            (mediaObject.media_type === "IMAGE" ||
+              mediaObject.media_type === "CAROUSEL_ALBUM") &&
+            mediaObject.id === postId
+          ) {
+            acc.push(mediaObject);
 
+            return acc;
+          }
           return acc;
-        }
-        return acc;
-      },
-      []
-    );
-    setPost(post?.[0]);
-  }, [id]);
+        },
+        []
+      );
+
+      setPost(post?.[0]);
+    }
+    if (platform === "facebook") {
+      const data = filterfacebookPost(fbPostData!);
+
+      const newData = data.filter((item: { id: string }) => item.id === postId);
+      setPost(newData[0]);
+    }
+  }, [postId]);
 
   useEffect(() => {
-    if (id && platfromData) {
+    if (postId && platform === "instagram") {
       fetchPostCommint();
     }
-  }, [id]);
+  }, [postId]);
+
+  console.log("post", post);
 
   return (
     <article className="border h-full  max-h-full">

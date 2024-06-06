@@ -24,7 +24,12 @@ const TextInput = ({
   const generatedId = React.useId();
   const appliedId = generatedId;
   return (
-    <div className={cx("flex flex-col gap-y-[10px]")}>
+    <div
+      className={cx(
+        "flex  gap-y-[10px]",
+        type === "checkbox" || type === "radio" ? "gap-x-2" : "flex-col"
+      )}
+    >
       <BodyBase
         fontWeight="regular"
         type="label"

@@ -8,28 +8,25 @@ import { getNonEmptyArrayKeys } from "@/utils/nonemptyarraykey";
 import { useGetfacebookPagePost } from "@/hooks/facebookapi";
 
 const Page = () => {
-  const [postId, setPostId] = useState<string>("");
-  const [value, setValue] = useState("newest");
-  const { data: postdata } = useGetfacebookPagePost();
+  const [singlePostDetail, setSinglePostDetail] = useState<{
+    postId: string;
+    platform: string;
+  }>({});
+  const [value, setValue] = useState("facebook");
 
   const { data } = useGetUserPlatForm();
 
   const nonemptyKeyArray = getNonEmptyArrayKeys(data?.[0]);
 
-  useEffect(() => {
-    const data = postdata?.reduce((acc, currentMedia) => {
-      const media = JSON.parse(currentMedia.media);
-
-      console.log(media);
-      acc.push(media);
-      return acc;
-    }, []);
-    console.log("data=", data);
-  }, [postdata]);
-
-  const handlePostClick = React.useCallback((id: string) => {
-    setPostId(id);
-  }, []);
+  const handlePostClick = React.useCallback(
+    (platform: string, postId: string) => {
+      setSinglePostDetail({
+        postId: postId,
+        platform,
+      });
+    },
+    []
+  );
 
   return (
     <section className="pt-8">
@@ -45,10 +42,10 @@ const Page = () => {
               );
             })}
           </Select>
-          <PostDisplay onClick={handlePostClick} />
+          <PostDisplay onClick={handlePostClick} selectedMedia={value} />
         </section>
         <div className=" w-[40%] bg-white">
-          <PostDetail id={postId} />
+          <PostDetail {...singlePostDetail} />
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import ImageUploading from "react-images-uploading";
 
@@ -42,7 +43,12 @@ const UploadImage = ({
             <button onClick={onImageRemoveAll}>Remove all</button>
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={image["data_url"]} alt="" width="100" />
+                <Image
+                  src={image["data_url"]}
+                  alt=""
+                  width="100"
+                  height={100}
+                />
                 <div className="image-item__btn-wrapper">
                   <button onClick={() => onImageUpdate(index)}>Update</button>
                   <button onClick={() => onImageRemove(index)}>Remove</button>

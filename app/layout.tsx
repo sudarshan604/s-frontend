@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FacebookSDK from "@/lib/FaceSdk";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

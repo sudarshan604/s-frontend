@@ -3,7 +3,7 @@ import apiClients from "@/services/http-service";
 import { MetaCredentialInterface } from "./instaFetch";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-interface PagePostInterface {
+export interface PagePostInterface {
   media: string;
   user: string;
 }

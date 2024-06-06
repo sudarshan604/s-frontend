@@ -29,7 +29,6 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
 
   useEffect(() => {
     const currentDate = moment();
-    console.log(currentDate.toDate());
     if (data) {
       const newdata = data.reduce(
         (acc: SheduleInterface[], currentMedia: SheduleInterface) => {

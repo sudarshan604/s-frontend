@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import PostDisplaySkeleTon from "./PostDisplaySkeleTon";
+import { PagePostInterface, useGetfacebookPagePost } from "@/hooks/facebookapi";
+import { platform } from "os";
 export interface PostInterface {
   user: string;
   media: string;
@@ -24,12 +26,21 @@ export interface PostDetailInterface {
 
 const httpService = new apiClients<PostInterface>("/insta/get-insta-post");
 
-const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
-  const [instaPost, setInstaPost] = useState();
+const PostDisplay = ({
+  onClick,
+  selectedMedia,
+}: {
+  onClick: (postId: string, platform: string) => void;
+  selectedMedia: string;
+}) => {
+  const [mediaPost, setMediaPost] = useState([]);
+
   const { data, error } = useQuery<any, Error>({
     queryKey: ["instapost"],
     queryFn: httpService.get,
   });
+
+  const { data: postData } = useGetfacebookPagePost();
 
   useEffect(() => {
     const post = data?.reduce(
@@ -47,26 +58,39 @@ const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
       },
       []
     );
-    setInstaPost(post);
-  }, [data]);
+
+    const facebookData = filterfacebookPost(postData!);
+
+    if (selectedMedia === "facebook") {
+      setMediaPost(facebookData);
+    }
+
+    if (selectedMedia === "instagram") {
+      setMediaPost(post);
+    }
+  }, [data, postData, selectedMedia]);
 
   return (
     <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  gap-2   min-h-full">
-      {(instaPost ?? []).map((post: PostDetailInterface) => {
+      {(mediaPost ?? []).map((post: PostDetailInterface) => {
         return (
           <div
             key={post.id}
             className="hover:cursor-pointer  "
-            onClick={() => onClick(post.id)}
+            onClick={() => onClick(selectedMedia, post.id)}
           >
-            <Image
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "auto", height: "100%" }}
-              src={post.media_url}
-              alt="insta-post"
-            />
+            {!post?.message ? (
+              <Image
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "auto", height: "100%" }}
+                src={post.media_url}
+                alt="insta-post"
+              />
+            ) : (
+              <div>{post?.message}</div>
+            )}
           </div>
         );
       })}
@@ -75,3 +99,22 @@ const PostDisplay = ({ onClick }: { onClick: (id: string) => void }) => {
 };
 
 export default React.memo(PostDisplay);
+
+export const filterfacebookPost = (postData: PagePostInterface[]) => {
+  return postData?.reduce((acc, currentMedia) => {
+    const media = JSON.parse(currentMedia.media);
+    if (media.attachments && media.attachments.data) {
+      media.attachments.data.forEach((attachment) => {
+        if (attachment.media && attachment.media.image) {
+          acc.push({
+            media_url: attachment.media.image.src,
+            id: attachment.target.id,
+          });
+        }
+      });
+    } else {
+      acc.push(media);
+    }
+    return acc;
+  }, []);
+};

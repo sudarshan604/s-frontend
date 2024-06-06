@@ -59,14 +59,19 @@ export const useFileUpload = () => {
     mutationFn: httpService.create,
     onSuccess: (data, err) => {
       if (data) {
+        console.log("fq", shedule, shedule.schedule.facebook);
         const newdata = {
           imgUrl: data.image.src,
           start: shedule.start,
           mediaType: "image",
-          platform: "instagram",
+          platform: [
+            { facebook: shedule.schedule.facebook },
+            { instagram: shedule.schedule.instagram },
+          ],
           caption: shedule.schedule.caption,
           end: moment(shedule.start).add(1, "hours").toDate(),
         };
+
         mutate(newdata);
       }
     },
