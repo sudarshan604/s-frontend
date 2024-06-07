@@ -1,27 +1,15 @@
 "use client";
 import Button from "@/components/shared/Button";
-import { useGoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Page = () => {
-  // const handleShowMe = async () => {
-  //   await fetch("http://localhost:5000/api/v1/users/showMe", {
-  //     credentials: "include",
-  //   });
-  // };
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => console.log(codeResponse),
-    flow: "auth-code",
-    scope: "https://www.googleapis.com/auth/youtube.readonly",
-  });
   const router = useRouter();
 
   return (
     <main className="h-full   bg-[#333] text-white ">
       <nav className="max-w-7xl mx-auto ">
         <h1 className="text-2xl pt-4">SocialNexus</h1>
-        <button onClick={login}>Clikc</button>
       </nav>
       <section className="max-w-7xl mx-auto h-5/6 flex items-center gap-x-8  ">
         <div className="flex flex-col w-[60%] gap-y-6">

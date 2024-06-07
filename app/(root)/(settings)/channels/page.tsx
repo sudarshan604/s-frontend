@@ -10,6 +10,7 @@ import useFaceBookPages, {
 import Modal from "@/components/shared/Modal";
 import FaceBookPageList from "./_components/FaceBookPageList";
 import { useSavePlatFormfacebook } from "@/hooks/facebookapi";
+import { useLoginWithGoogle } from "@/services/youtube-api";
 
 const Page = () => {
   const pageId = useFaceBookPages((s) => s.selectedPageId);
@@ -20,6 +21,7 @@ const Page = () => {
   const { mutate } = useSavePlatForm();
   const [openModel, setModelOpen] = useState(false);
   const { mutate: saveFacebookToken } = useSavePlatFormfacebook();
+  const { login } = useLoginWithGoogle();
 
   useEffect(() => {
     if (pageId) {
@@ -42,7 +44,6 @@ const Page = () => {
       icon: "/assets/images/facebook.png",
       description: "Page or Group",
       onLogin: loginWithFacebook,
-      // onLogin: () => facebookLoginDialog("facebook"),
     },
     {
       label: "Instagram",
@@ -54,7 +55,7 @@ const Page = () => {
       label: "YouTube",
       icon: "/assets/images/youtube.png",
       description: "Channel",
-      onLogin: () => {},
+      onLogin: login,
     },
     {
       label: "TikTok",
