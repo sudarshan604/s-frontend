@@ -36,7 +36,7 @@ const Page = () => {
         name: newPage[0].name,
       });
     }
-  }, [pageId]);
+  }, [pageId, pages, saveFacebookToken]);
 
   const socialMedia = [
     {

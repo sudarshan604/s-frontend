@@ -81,15 +81,13 @@ const PostDetail = ({
       const newData = data.filter((item: { id: string }) => item.id === postId);
       setPost(newData[0]);
     }
-  }, [postId]);
+  }, [data, fbPostData, platform, postId]);
 
   useEffect(() => {
     if (postId && platform === "instagram") {
       fetchPostCommint();
     }
-  }, [postId]);
-
-  console.log("post", post);
+  }, [fetchPostCommint, platform, postId]);
 
   return (
     <article className="border h-full  max-h-full">

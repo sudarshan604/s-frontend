@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import QueryClientProvider from "./QueryClientProvider";
 import ThemeSwitcher from "@/components/theme-switcher";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FacebookSDK from "@/lib/FaceSdk";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import "./globals.css";
+import QueryClientProvider from "./QueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

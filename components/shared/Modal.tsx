@@ -68,7 +68,7 @@ const Modal = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [onClose]);
 
   if (!open) {
     return <></>;

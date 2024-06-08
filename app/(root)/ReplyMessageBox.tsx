@@ -37,7 +37,7 @@ const ReplyMessageBox = ({
 
   useEffect(() => {
     fetcCommentByUser();
-  }, [id]);
+  }, [fetcCommentByUser, id]);
 
   const replyComment = async (id: string) => {
     try {

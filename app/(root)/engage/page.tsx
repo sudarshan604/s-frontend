@@ -11,12 +11,18 @@ const Page = () => {
   const [singlePostDetail, setSinglePostDetail] = useState<{
     postId: string;
     platform: string;
-  }>({});
-  const [value, setValue] = useState("facebook");
+  }>();
+  const [value, setValue] = useState("");
+  const [platformData, setPlatFormData] = useState<string[]>([]);
 
   const { data } = useGetUserPlatForm();
 
-  const nonemptyKeyArray = getNonEmptyArrayKeys(data?.[0]);
+  useEffect(() => {
+    const nonemptyKeyArray = getNonEmptyArrayKeys(data?.[0]);
+
+    setPlatFormData(nonemptyKeyArray);
+    setValue(nonemptyKeyArray[0]);
+  }, [data]);
 
   const handlePostClick = React.useCallback(
     (platform: string, postId: string) => {
@@ -34,7 +40,7 @@ const Page = () => {
       <div className="flex  min-h-full justify-around">
         <section className="w-1/4 min-h-full   ">
           <Select value={value} onChange={(e) => setValue(e.target.value)}>
-            {nonemptyKeyArray.map((item) => {
+            {(platformData ?? []).map((item) => {
               return (
                 <option key={item} value={item}>
                   {item}

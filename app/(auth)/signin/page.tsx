@@ -12,10 +12,6 @@ import Button from "@/components/shared/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-interface UserInterface {
-  user: { name: string; userId: string };
-}
-
 export const schema = z.object({
   email: z.string().email().optional(),
   password: z.string().min(6).optional(),

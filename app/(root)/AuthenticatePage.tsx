@@ -1,5 +1,6 @@
+"use client";
 import { useCurrentUser } from "@/hooks/useFetch";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, redirect } from "next/navigation";
 import React from "react";
 
 import { Spinner } from "@/components/shared/Spinner";
@@ -14,12 +15,12 @@ const AuthenticatePage = ({ children }: { children: React.ReactNode }) => {
       ? "h-[calc(100vh-100px)] min-h-[calc(100vh-100px)] pt-3 "
       : "h-[100vh] max-h-[100vh]";
 
-  if (isLoading && isFetching) {
+  if (isLoading) {
     return <Spinner />;
   }
 
   if (!data) {
-    router.push("/");
+    redirect("/signin");
   }
 
   return (

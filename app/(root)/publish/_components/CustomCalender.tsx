@@ -51,7 +51,7 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
       mutate({ file: shedule.schedule.uploadFile[0].data_url });
       shedule.setScheduleData({ uploadFile: [] });
     }
-  }, [shedule.schedule]);
+  }, [mutate, shedule, shedule.schedule]);
 
   const [view, setView] = useState<View>(Views.MONTH);
 
