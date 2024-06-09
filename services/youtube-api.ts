@@ -24,7 +24,7 @@ export const useLoginWithGoogle = () => {
       });
     },
     flow: "auth-code",
-    scope: "https://www.googleapis.com/auth/youtube.readonly",
+    scope: "https://www.googleapis.com/auth/youtube.upload",
   });
 
   return { login };
