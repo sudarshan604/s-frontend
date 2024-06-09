@@ -21,8 +21,6 @@ const ChannelCard = (item: CardProps) => {
 
   const mediaData = data?.[0]?.[lowerCaseLabel as "facebook" | "instagram"];
 
-  console.log(data?.[0]?.["instagram"]);
-
   return (
     <article className="flex items-center justify-between border min-w-[500px] w-96 px-3 py-4 rounded-sm">
       <figure className="">

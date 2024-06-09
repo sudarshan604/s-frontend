@@ -10,9 +10,7 @@ const localizer = momentLocalizer(moment);
 
 export default function Calendar(props: Omit<CalendarProps, "localizer">) {
   const components = {
-    event: (props) => {
-      console.log(props);
-    },
+    event: (props) => {},
   };
 
   return (
@@ -20,9 +18,7 @@ export default function Calendar(props: Omit<CalendarProps, "localizer">) {
       views={["month", "week", "day"]}
       components={components}
       {...props}
-      onSelectSlot={(slotInfo) => {
-        console.log(slotInfo);
-      }}
+      onSelectSlot={(slotInfo) => {}}
       selectable
       localizer={localizer}
     />

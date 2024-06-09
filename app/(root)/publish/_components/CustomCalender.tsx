@@ -20,7 +20,6 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
   const shedule = usePostSchedule();
 
   const handleSelectSlot = (slotInfo: { start: Date }) => {
-    console.log(slotInfo);
     showModel();
     shedule.setScheduleDate({
       start: slotInfo.start as Date,

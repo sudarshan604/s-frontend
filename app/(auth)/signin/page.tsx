@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import apiClients from "@/services/http-service";
 import Button from "@/components/shared/Button";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 export const schema = z.object({
@@ -25,9 +26,14 @@ const httpService = new apiClients("/auth/login");
 const Page = () => {
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  const notify = () => {
+    toast("login succefully !");
+  };
+
+  const { mutate, isPending } = useMutation({
     mutationFn: httpService.create,
     onSuccess: () => {
+      notify();
       router.push("/channels");
     },
   });
@@ -69,7 +75,13 @@ const Page = () => {
         </BodyBase>
       </div>
 
-      <Button impact="bold" tone="default" shape="rounded" size="large">
+      <Button
+        impact="bold"
+        disabled={isPending}
+        tone="default"
+        shape="rounded"
+        size="large"
+      >
         Login
       </Button>
     </Form>

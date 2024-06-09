@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import PostDisplay from "../PostDisplay";
-import PostDetail from "../PostDetail";
 import Select from "@/components/shared/Select";
-import { useGetUserPlatForm, UserDocument } from "@/hooks/instaFetch";
+import { useGetUserPlatForm } from "@/hooks/instaFetch";
 import { getNonEmptyArrayKeys } from "@/utils/nonemptyarraykey";
-import { useGetfacebookPagePost } from "@/hooks/facebookapi";
+import React, { useEffect, useState } from "react";
+import PostDetail from "../PostDetail";
+import PostDisplay from "../PostDisplay";
 
 const Page = () => {
   const [singlePostDetail, setSinglePostDetail] = useState<{
@@ -34,6 +33,7 @@ const Page = () => {
     []
   );
 
+  console.log("sing=", singlePostDetail);
   return (
     <section className="pt-8">
       <div></div>

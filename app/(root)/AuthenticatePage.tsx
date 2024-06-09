@@ -20,7 +20,7 @@ const AuthenticatePage = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!data) {
-    redirect("/signin");
+    router.push("/");
   }
 
   return (

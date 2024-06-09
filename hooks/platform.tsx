@@ -59,7 +59,6 @@ export const useFileUpload = () => {
     mutationFn: httpService.create,
     onSuccess: (data, err) => {
       if (data) {
-        console.log("fq", shedule, shedule.schedule.facebook);
         const newdata = {
           imgUrl: data.image.src,
           start: shedule.start,

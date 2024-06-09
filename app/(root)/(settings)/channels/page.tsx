@@ -21,7 +21,7 @@ const Page = () => {
   const { mutate } = useSavePlatForm();
   const [openModel, setModelOpen] = useState(false);
   const { mutate: saveFacebookToken } = useSavePlatFormfacebook();
-  const { login } = useLoginWithGoogle();
+  const { login: loginWithGoogle } = useLoginWithGoogle();
 
   useEffect(() => {
     if (pageId) {
@@ -55,7 +55,7 @@ const Page = () => {
       label: "YouTube",
       icon: "/assets/images/youtube.png",
       description: "Channel",
-      onLogin: login,
+      onLogin: loginWithGoogle,
     },
     {
       label: "TikTok",

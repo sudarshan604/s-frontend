@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import PostDisplaySkeleTon from "./PostDisplaySkeleTon";
 import { PagePostInterface, useGetfacebookPagePost } from "@/hooks/facebookapi";
 import { platform } from "os";
+import { useGetYoutubeContent } from "@/services/youtube-api";
 export interface PostInterface {
   user: string;
   media: string;
@@ -41,6 +42,7 @@ const PostDisplay = ({
   });
 
   const { data: postData } = useGetfacebookPagePost();
+  const { data: youtubeVideoData } = useGetYoutubeContent();
 
   useEffect(() => {
     const post = data?.reduce(
@@ -61,6 +63,13 @@ const PostDisplay = ({
 
     const facebookData = filterfacebookPost(postData!);
 
+    const youtudata = youtubeVideoData?.map((item) => {
+      return {
+        media_url: item.thumbnails,
+        id: item.resourceId,
+      };
+    });
+
     if (selectedMedia === "facebook") {
       setMediaPost(facebookData);
     }
@@ -68,7 +77,10 @@ const PostDisplay = ({
     if (selectedMedia === "instagram") {
       setMediaPost(post);
     }
-  }, [data, postData, selectedMedia]);
+    if (selectedMedia === "youtube") {
+      setMediaPost(youtudata);
+    }
+  }, [data, postData, selectedMedia, youtubeVideoData]);
 
   return (
     <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  gap-2   min-h-full">

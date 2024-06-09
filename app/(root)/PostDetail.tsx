@@ -13,6 +13,7 @@ import Icon from "@/assets";
 import { useGetUserPlatForm } from "@/hooks/instaFetch";
 import ReplyMessageBox from "./ReplyMessageBox";
 import { PagePostInterface, useGetfacebookPagePost } from "@/hooks/facebookapi";
+import { useGetYoutubeContent } from "@/services/youtube-api";
 
 const httpService = new apiClients<PostInterface>("/insta/get-insta-post");
 
@@ -41,6 +42,7 @@ const PostDetail = ({
     queryFn: httpService.get,
   });
   const { data: fbPostData } = useGetfacebookPagePost();
+  const { data: youtubeVideoData } = useGetYoutubeContent();
 
   const accesToken = platfromData?.[0]?.instagram[0]?.accessToken;
 
@@ -53,6 +55,19 @@ const PostDetail = ({
 
     setComments(data);
   };
+
+  useEffect(() => {
+    if (platform === "youtube") {
+      const newData = youtubeVideoData?.filter(
+        (item) => item.resourceId === postId
+      );
+
+      const post = {
+        media_url: newData[0].thumbnails,
+      };
+      setPost(post);
+    }
+  }, [youtubeVideoData, platform, postId]);
 
   useEffect(() => {
     if (platform === "instagram") {

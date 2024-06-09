@@ -1,11 +1,10 @@
 "use client";
 import { useCurrentUser, useDeleteQuery } from "@/hooks/useFetch";
 import Avvvatars from "avvvatars-react";
-import React, { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 import Button from "../shared/Button";
-import apiClients from "@/services/http-service";
 import { BodyBase } from "../typography/BodyBase";
-import { useQuery } from "@tanstack/react-query";
 
 const UserAvatar = () => {
   const { data } = useCurrentUser();
@@ -15,6 +14,7 @@ const UserAvatar = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      // redirect("/");
     }
   }, [isSuccess]);
 

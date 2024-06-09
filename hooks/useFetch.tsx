@@ -21,6 +21,7 @@ export const useDeleteQuery = () => {
 
   return useQuery({
     queryKey: ["delete"],
-    queryFn: () => httpService.delete,
+    queryFn: httpService.delete,
+    enabled: false,
   });
 };
