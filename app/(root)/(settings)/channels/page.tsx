@@ -13,7 +13,7 @@ import { useSavePlatFormfacebook } from "@/hooks/facebookapi";
 import { useLoginWithGoogle } from "@/services/youtube-api";
 
 const Page = () => {
-  const pageId = useFaceBookPages((s) => s.selectedPageId);
+  const { selectedPageId: pageId, setSelectedPageID } = useFaceBookPages();
 
   const { loginWithFacebook, facebookLoginDialog } = useFaceBookLogin();
   const { accessToken, platform, userId } = useFacebookStore();
@@ -35,6 +35,7 @@ const Page = () => {
         platform: "facebook",
         name: newPage[0].name,
       });
+      setSelectedPageID("");
     }
   }, [pageId, pages, saveFacebookToken]);
 

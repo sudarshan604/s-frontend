@@ -44,8 +44,12 @@ const PostDetail = ({
   const { data: fbPostData } = useGetfacebookPagePost();
   const { data: youtubeVideoData } = useGetYoutubeContent();
 
-  const accesToken = platfromData?.[0]?.instagram[0]?.accessToken;
+  const accesToken =
+    platform === "instagram"
+      ? platfromData?.[0]?.instagram[0]?.accessToken
+      : platfromData?.[0]?.facebook[0]?.accessToken;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPostCommint = async () => {
     const res = await fetch(
       `https://graph.facebook.com/${postId}/comments?access_token=${accesToken}`
@@ -54,6 +58,23 @@ const PostDetail = ({
     const { data } = await res.json();
 
     setComments(data);
+  };
+
+  const fetchPostCommintFacebook = async () => {
+    const res = await fetch(
+      `https://graph.facebook.com/${postId}/comments?fields=from,message&access_token=${accesToken}`
+    );
+
+    const { data } = await res.json();
+
+    const filterData = data.map((item: any) => {
+      return {
+        id: item.id,
+        text: item.message,
+      };
+    });
+
+    setComments(filterData);
   };
 
   useEffect(() => {
@@ -104,6 +125,12 @@ const PostDetail = ({
     }
   }, [fetchPostCommint, platform, postId]);
 
+  useEffect(() => {
+    if (postId && platform === "facebook") {
+      fetchPostCommintFacebook();
+    }
+  }, [platform, postId]);
+
   return (
     <article className="border h-full  max-h-full">
       <div className="p-2  flex pb-4 gap-x-6 border-b-gray-200">
@@ -137,6 +164,7 @@ const PostDetail = ({
             return (
               <ReplyMessageBox
                 key={data.id}
+                platform={platform}
                 accessToken={accesToken}
                 data={data}
               />

@@ -10,9 +10,11 @@ import { Heading } from "@/components/typography/Heading";
 const ReplyMessageBox = ({
   data,
   accessToken,
+  platform,
 }: {
   data: CommentInterface;
   accessToken: string;
+  platform: string;
 }) => {
   const [replayMessage, setRelyMessage] = useState("");
   const [commentUsetDetail, setCommentUserDetail] =
@@ -20,6 +22,7 @@ const ReplyMessageBox = ({
 
   const id = data.id;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetcCommentByUser = async () => {
     const url = `https://graph.facebook.com/v17.0/${id}?fields=id,text,timestamp,username`;
 
@@ -49,6 +52,26 @@ const ReplyMessageBox = ({
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
+      });
+      const data = await response.json();
+      setRelyMessage("");
+    } catch (error) {}
+  };
+
+  const replyCommentFacebook = async (id: string) => {
+    try {
+      const url = `https://graph.facebook.com/v20.0/${id}/comments?access_token=${accessToken}`;
+
+      const reply = {
+        message: replayMessage,
+      };
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(reply),
       });
       const data = await response.json();
       setRelyMessage("");
@@ -100,7 +123,11 @@ const ReplyMessageBox = ({
               <button
                 onClick={() => {
                   if (replayMessage) {
-                    replyComment(id);
+                    if (platform === "facebook") {
+                      replyCommentFacebook(id);
+                    } else {
+                      replyComment(id);
+                    }
                   }
                 }}
                 className="ml-auto "

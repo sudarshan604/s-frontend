@@ -45,45 +45,42 @@ const PostDisplay = ({
   const { data: youtubeVideoData } = useGetYoutubeContent();
 
   useEffect(() => {
-    const post = data?.reduce(
-      (acc: PostDetailInterface[], currentValue: PostInterface) => {
-        let mediaObject = JSON.parse(currentValue.media);
-        if (
-          mediaObject.media_type === "IMAGE" ||
-          mediaObject.media_type === "CAROUSEL_ALBUM"
-        ) {
-          acc.push(mediaObject);
-
-          return acc;
-        }
-        return acc;
-      },
-      []
-    );
-
-    const facebookData = filterfacebookPost(postData!);
-
-    const youtudata = youtubeVideoData?.map((item) => {
-      return {
-        media_url: item.thumbnails,
-        id: item.resourceId,
-      };
-    });
-
     if (selectedMedia === "facebook") {
+      const facebookData = filterfacebookPost(postData!);
       setMediaPost(facebookData);
     }
 
     if (selectedMedia === "instagram") {
+      const post = data?.reduce(
+        (acc: PostDetailInterface[], currentValue: PostInterface) => {
+          let mediaObject = JSON.parse(currentValue.media);
+          if (
+            mediaObject.media_type === "IMAGE" ||
+            mediaObject.media_type === "CAROUSEL_ALBUM"
+          ) {
+            acc.push(mediaObject);
+
+            return acc;
+          }
+          return acc;
+        },
+        []
+      );
       setMediaPost(post);
     }
     if (selectedMedia === "youtube") {
+      const youtudata = youtubeVideoData?.map((item) => {
+        return {
+          media_url: item.thumbnails,
+          id: item.resourceId,
+        };
+      });
       setMediaPost(youtudata);
     }
   }, [data, postData, selectedMedia, youtubeVideoData]);
 
   return (
-    <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  gap-2   min-h-full">
+    <section className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  gap-2 mt-3   min-h-full">
       {(mediaPost ?? []).map((post: PostDetailInterface) => {
         return (
           <div

@@ -32,13 +32,12 @@ const Page = () => {
     },
     []
   );
-
-  console.log("sing=", singlePostDetail);
+  console.log("deta=", singlePostDetail);
   return (
     <section className="pt-8">
       <div></div>
       <div className="flex  min-h-full justify-around">
-        <section className="w-1/4 min-h-full   ">
+        <section className="w-1/4 min-h-full  ">
           <Select value={value} onChange={(e) => setValue(e.target.value)}>
             {(platformData ?? []).map((item) => {
               return (
