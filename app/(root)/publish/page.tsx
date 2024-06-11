@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div>
-      <CustomCalender showModel={() => setShowModal(true)} />
+      <CustomCalender showModel={(isOpen) => setShowModal(isOpen)} />
       <Modal
         title="Connect to the facebook Page"
         onClose={() => setShowModal(false)}

@@ -32,12 +32,16 @@ export const useUserPlatform = () => {
 };
 
 export const useShedulePost = () => {
+  const { refetch } = useGetShedulePost();
   const httpService = new apiClients<SheduleInterface>(
     "/shedule/create-shedule"
   );
 
   return useMutation({
     mutationFn: httpService.create,
+    onSuccess: () => {
+      refetch();
+    },
   });
 };
 

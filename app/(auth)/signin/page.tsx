@@ -27,7 +27,7 @@ const Page = () => {
   const router = useRouter();
 
   const notify = () => {
-    toast("login succefully !");
+    toast.success("login succefully !");
   };
 
   const { mutate, isPending } = useMutation({

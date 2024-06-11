@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import ChannelCard from "./_components/ChannelCard";
 import useFaceBookLogin from "@/hooks/useFacebookLogin";
 import useFacebookStore from "@/state-management/facebook/metaStore";
-import { useSaveInstaUser, useSavePlatForm } from "@/hooks/instaFetch";
+import {
+  useGetUserPlatForm,
+  useSaveInstaUser,
+  useSavePlatForm,
+} from "@/hooks/instaFetch";
 import useFaceBookPages, {
   PageDataInterface,
 } from "@/state-management/facebook/pageStore";
@@ -18,10 +22,13 @@ const Page = () => {
   const { loginWithFacebook, facebookLoginDialog } = useFaceBookLogin();
   const { accessToken, platform, userId } = useFacebookStore();
   const { setPages, pages } = useFaceBookPages();
-  const { mutate } = useSavePlatForm();
+  const { mutate, isSuccess } = useSavePlatForm();
   const [openModel, setModelOpen] = useState(false);
-  const { mutate: saveFacebookToken } = useSavePlatFormfacebook();
+  const { mutate: saveFacebookToken, isSuccess: isFacebookTokenSaveSuccess } =
+    useSavePlatFormfacebook();
   const { login: loginWithGoogle } = useLoginWithGoogle();
+
+  const { refetch } = useGetUserPlatForm();
 
   useEffect(() => {
     if (pageId) {
@@ -93,6 +100,13 @@ const Page = () => {
       setModelOpen(true);
     }
   }, [pages]);
+
+  useEffect(() => {
+    if (isSuccess || isFacebookTokenSaveSuccess) {
+      console.log("save success");
+      refetch();
+    }
+  }, [isSuccess, isFacebookTokenSaveSuccess]);
 
   return (
     <>

@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { Calendar, View, Views, momentLocalizer } from "react-big-calendar";
+import { toast } from "react-toastify";
 
 import {
   SheduleInterface,
@@ -13,14 +14,18 @@ import PostEvent from "./PostEvent";
 
 const localizer = momentLocalizer(moment);
 
-const CustomCalender = ({ showModel }: { showModel: () => void }) => {
+const CustomCalender = ({
+  showModel,
+}: {
+  showModel: (isOpen: boolean) => void;
+}) => {
   const [events, setEvents] = useState<SheduleInterface[]>([]);
   const { data } = useGetShedulePost();
-  const { mutate } = useFileUpload();
+  const { mutate, isSuccess } = useFileUpload();
   const shedule = usePostSchedule();
 
   const handleSelectSlot = (slotInfo: { start: Date }) => {
-    showModel();
+    showModel(true);
     shedule.setScheduleDate({
       start: slotInfo.start as Date,
     });
@@ -46,8 +51,15 @@ const CustomCalender = ({ showModel }: { showModel: () => void }) => {
   }, [data]);
 
   useEffect(() => {
+    if (isSuccess) {
+      toast.success("Shedule post succefully");
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (shedule.schedule.uploadFile[0]?.data_url) {
       mutate({ file: shedule.schedule.uploadFile[0].data_url });
+      showModel(false);
       shedule.setScheduleData({ uploadFile: [] });
     }
   }, [mutate, shedule, shedule.schedule]);

@@ -19,7 +19,8 @@ const ChannelCard = (item: CardProps) => {
   const { data } = useGetUserPlatForm();
   const lowerCaseLabel = item.label.toLocaleLowerCase();
 
-  const mediaData = data?.[0]?.[lowerCaseLabel as "facebook" | "instagram"];
+  const mediaData =
+    data?.[0]?.[lowerCaseLabel as "facebook" | "instagram" | "youtube"];
 
   return (
     <article className="flex items-center justify-between border min-w-[500px] w-96 px-3 py-4 rounded-sm">

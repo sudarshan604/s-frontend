@@ -3,6 +3,7 @@ import { useCurrentUser, useDeleteQuery } from "@/hooks/useFetch";
 import Avvvatars from "avvvatars-react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Button from "../shared/Button";
 import { BodyBase } from "../typography/BodyBase";
 
@@ -14,7 +15,8 @@ const UserAvatar = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      // redirect("/");
+      toast.success("logout succefully");
+      redirect("/");
     }
   }, [isSuccess]);
 

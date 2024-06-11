@@ -9,12 +9,19 @@ import { useForm } from "react-hook-form";
 import { FormData, schema } from "../signin/page";
 import Button from "@/components/shared/Button";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const httpService = new apiClients<any>("/auth/register");
 
 const Page = () => {
   const { mutate } = useMutation({
     mutationFn: httpService.create,
+    onSuccess: () => {
+      toast.success("user register successfully");
+    },
+    onError: () => {
+      toast.error("error registering user");
+    },
   });
   const {
     register,

@@ -23,6 +23,16 @@ const nextConfig = {
         hostname: "i.ytimg.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "scontent.fktm7-1.fna.fbcdn.net",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent.fktm10-1.fna.fbcdn.net",
+        pathname: "**",
+      },
     ],
   },
 };
