@@ -10,7 +10,6 @@ const UploadImage = ({
   onChange: (imageList, addUpdateIndex) => void;
 }) => {
   const maxNumber = 69;
-
   return (
     <div className="App">
       <ImageUploading

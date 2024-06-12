@@ -1,21 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ChannelCard from "./_components/ChannelCard";
+import Modal from "@/components/shared/Modal";
+import { useSavePlatFormfacebook } from "@/hooks/facebookapi";
+import { useGetUserPlatForm, useSavePlatForm } from "@/hooks/instaFetch";
+import { SheduleInterface } from "@/hooks/platform";
 import useFaceBookLogin from "@/hooks/useFacebookLogin";
+import apiClients from "@/services/http-service";
+import { useLoginWithGoogle } from "@/services/youtube-api";
 import useFacebookStore from "@/state-management/facebook/metaStore";
-import {
-  useGetUserPlatForm,
-  useSaveInstaUser,
-  useSavePlatForm,
-} from "@/hooks/instaFetch";
 import useFaceBookPages, {
   PageDataInterface,
 } from "@/state-management/facebook/pageStore";
-import Modal from "@/components/shared/Modal";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import ChannelCard from "./_components/ChannelCard";
 import FaceBookPageList from "./_components/FaceBookPageList";
-import { useSavePlatFormfacebook } from "@/hooks/facebookapi";
-import { useLoginWithGoogle } from "@/services/youtube-api";
-
+import { toast } from "react-toastify";
 const Page = () => {
   const { selectedPageId: pageId, setSelectedPageID } = useFaceBookPages();
 
@@ -27,8 +26,17 @@ const Page = () => {
   const { mutate: saveFacebookToken, isSuccess: isFacebookTokenSaveSuccess } =
     useSavePlatFormfacebook();
   const { login: loginWithGoogle } = useLoginWithGoogle();
+  const httpService = new apiClients<SheduleInterface>("/tiktok/qauth");
+
+  const { mutate: tiktokMutate } = useMutation({
+    mutationFn: httpService.create,
+  });
 
   const { refetch } = useGetUserPlatForm();
+
+  const loginWithTiktok = () => {
+    tiktokMutate({});
+  };
 
   useEffect(() => {
     if (pageId) {
@@ -69,7 +77,7 @@ const Page = () => {
       label: "TikTok",
       icon: "/assets/images/tiktok.png",
       description: "Business or Creator accounts",
-      onLogin: loginWithFacebook,
+      onLogin: loginWithTiktok,
     },
   ];
 
@@ -103,7 +111,6 @@ const Page = () => {
 
   useEffect(() => {
     if (isSuccess || isFacebookTokenSaveSuccess) {
-      console.log("save success");
       refetch();
     }
   }, [isSuccess, isFacebookTokenSaveSuccess]);

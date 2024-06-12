@@ -32,7 +32,6 @@ const Page = () => {
     },
     []
   );
-  console.log("deta=", singlePostDetail);
   return (
     <section className="pt-8">
       <div></div>

@@ -11,6 +11,8 @@ import Button from "@/components/shared/Button";
 import UploadImage from "./UploadImage";
 import usePostShedule from "@/state-management/facebook/postSheduleStore";
 import TextInput from "@/components/shared/TextInput";
+import UploadVideo from "./UploadVideo";
+import { useFileUpload } from "@/hooks/platform";
 
 export const schema = z.object({
   instagram: z.boolean().optional(),
@@ -21,12 +23,14 @@ export const schema = z.object({
 export type FormData = z.infer<typeof schema>;
 
 const ImageUpload = () => {
-  const [uploadFile, setImages] = React.useState<
+  const [uploadFile, setUploadFIle] = React.useState<
     {
       data_url: string;
       file: File;
     }[]
   >([]);
+
+  const { mutate } = useFileUpload();
   const {
     register,
     handleSubmit,
@@ -36,7 +40,7 @@ const ImageUpload = () => {
   const { setScheduleData } = usePostShedule();
 
   const onSubmit = async (data: FormData) => {
-    setScheduleData({ uploadFile, ...data });
+    setScheduleData({ uploadFile, ...data, from: "video" });
   };
 
   return (
@@ -60,11 +64,11 @@ const ImageUpload = () => {
           />
         </div>
         <textarea className="w-full min-h-72 h-1/2" {...register("caption")} />
-        <UploadImage
+        {/* <UploadImage
           images={uploadFile}
-          onChange={(imageList, addUpdateIndex) => setImages(imageList)}
-        />
-
+          onChange={(imageList, addUpdateIndex) => setUploadFIle(imageList)}
+        /> */}
+        <UploadVideo onChange={(file) => setUploadFIle([file])} />
         <footer>
           <h2>shedule time</h2>
         </footer>

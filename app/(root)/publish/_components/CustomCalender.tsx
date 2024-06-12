@@ -57,8 +57,15 @@ const CustomCalender = ({
   }, [isSuccess]);
 
   useEffect(() => {
-    if (shedule.schedule.uploadFile[0]?.data_url) {
-      mutate({ file: shedule.schedule.uploadFile[0].data_url });
+    if (shedule.schedule.uploadFile[0] !== undefined) {
+      const mediaType =
+        shedule.schedule.from === "video"
+          ? shedule.schedule.uploadFile[0]
+          : shedule.schedule.uploadFile[0]?.data_url;
+
+      console.log("tyoe=", shedule.schedule.uploadFile[0], shedule);
+
+      mutate({ file: mediaType });
       showModel(false);
       shedule.setScheduleData({ uploadFile: [] });
     }
@@ -76,7 +83,8 @@ const CustomCalender = ({
         .filter(([key, value]) => Array.isArray(value))
         .map(([key, value]) => ({ key, value }));
 
-      return <PostEvent data={arrayEntries} />;
+      // return <PostEvent data={arrayEntries} />;
+      return;
     },
   };
 

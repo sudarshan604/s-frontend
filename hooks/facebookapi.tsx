@@ -2,6 +2,7 @@ import apiClients from "@/services/http-service";
 
 import { MetaCredentialInterface } from "./instaFetch";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export interface PagePostInterface {
   media: string;
@@ -50,6 +51,12 @@ export const useSavePlatFormfacebook = () => {
       if (data) {
         mutate({});
       }
+    },
+    onSuccess: () => {
+      toast.success("social media connected succefully");
+    },
+    onError: (err) => {
+      toast.error("Error connection social media ");
     },
   });
 };

@@ -4,6 +4,7 @@ interface Schedule {
   instagram: any;
   facebook: any;
   caption: string;
+  from: string;
   uploadFile: {
     data_url: string;
     file: File;
@@ -17,6 +18,7 @@ interface PageInterface {
   setScheduleData: (data: {
     caption?: string;
     facebook?: boolean;
+    from: string;
     instagram?: boolean;
     uploadFile?: {
       data_url: string;
@@ -31,8 +33,10 @@ const usePostSchedule = create<PageInterface>((set) => ({
     caption: "",
     facebook: "",
     instagram: "",
+    from: "",
     uploadFile: [],
   },
+  from: "",
   start: new Date(),
   end: new Date(),
   setScheduleData: (data) => {
@@ -51,6 +55,8 @@ const usePostSchedule = create<PageInterface>((set) => ({
           data.uploadFile !== undefined
             ? data.uploadFile
             : state.schedule.uploadFile,
+
+        from: data.from !== undefined ? data.from : state.schedule.from,
       },
     }));
   },

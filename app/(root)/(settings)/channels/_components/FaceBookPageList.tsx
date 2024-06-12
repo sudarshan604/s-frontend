@@ -42,7 +42,7 @@ const FaceBookPageList: React.FC<FacebookPageListInterface> = ({
 
   return (
     <Form handleSubmit={handleSubmit(onSubmit)}>
-      {data.map((item: PageDataInterface) => {
+      {data?.map((item: PageDataInterface) => {
         return (
           <TextInput
             key={item.id}

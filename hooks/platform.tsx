@@ -62,21 +62,20 @@ export const useFileUpload = () => {
   return useMutation<FileInterface>({
     mutationFn: httpService.create,
     onSuccess: (data, err) => {
-      if (data) {
-        const newdata = {
-          imgUrl: data.image.src,
-          start: shedule.start,
-          mediaType: "image",
-          platform: [
-            { facebook: shedule.schedule.facebook },
-            { instagram: shedule.schedule.instagram },
-          ],
-          caption: shedule.schedule.caption,
-          end: moment(shedule.start).add(1, "hours").toDate(),
-        };
-
-        mutate(newdata);
-      }
+      // if (data) {
+      //   const newdata = {
+      //     imgUrl: data.image.src,
+      //     start: shedule.start,
+      //     mediaType: "image",
+      //     platform: [
+      //       { facebook: shedule.schedule.facebook },
+      //       { instagram: shedule.schedule.instagram },
+      //     ],
+      //     caption: shedule.schedule.caption,
+      //     end: moment(shedule.start).add(1, "hours").toDate(),
+      //   };
+      //   mutate(newdata);
+      // }
     },
   });
 };

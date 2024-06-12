@@ -1,6 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import apiClients from "./http-service";
+import { useGetUserPlatForm } from "@/utils/Auth";
 
 export interface YoutubeVideoInterface {
   channelId: string;
@@ -55,9 +56,12 @@ export const useSaveYoutubeToken = () => {
 };
 
 export const useLoginWithGoogle = () => {
+  const { refetch } = useGetUserPlatForm();
+
   const { mutate } = useSaveYoutubeToken();
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
+      refetch();
       mutate({
         code: codeResponse.code,
         platform: "youtube",
