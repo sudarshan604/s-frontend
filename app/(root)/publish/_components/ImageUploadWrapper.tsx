@@ -68,7 +68,7 @@ const ImageUpload = () => {
           images={uploadFile}
           onChange={(imageList, addUpdateIndex) => setUploadFIle(imageList)}
         /> */}
-        <UploadVideo onChange={(file) => setUploadFIle([file])} />
+        <UploadVideo onChange={(file) => setUploadFIle(file)} />
         <footer>
           <h2>shedule time</h2>
         </footer>

@@ -11,14 +11,18 @@ const UploadVideo = ({ onChange }: { onChange: (uploadedFile) => void }) => {
     const uploadedFile = event.target.files[0];
     // setFile(uploadedFile);
 
-    console.log(event.target.files[0]);
     const formData = new FormData();
-    formData.append("files", event.target.files);
-    console.log("foem data=", formData);
+    formData.append("file", uploadedFile);
 
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      console.log("Base64 String: ", base64String);
+    };
+
+    reader.readAsDataURL(uploadedFile);
+
     // const response = await axios.post(
     //   "http://localhost:5000/api/v1/shedule/uploads",
     //   formData,
