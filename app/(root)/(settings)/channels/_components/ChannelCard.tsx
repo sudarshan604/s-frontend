@@ -37,7 +37,7 @@ const ChannelCard = (item: CardProps) => {
         </BodyBase>
       </div>
       <div className="">
-        {!(mediaData?.length > 0) ? (
+        {!(mediaData?.length! > 0) ? (
           <Button
             onClick={item.onLogin}
             impact="bold"

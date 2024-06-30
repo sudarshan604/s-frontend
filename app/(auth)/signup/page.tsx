@@ -10,14 +10,17 @@ import { FormData, schema } from "../signin/page";
 import Button from "@/components/shared/Button";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const httpService = new apiClients<any>("/auth/register");
 
 const Page = () => {
+  const router = useRouter();
   const { mutate } = useMutation({
     mutationFn: httpService.create,
     onSuccess: () => {
       toast.success("user register successfully");
+      router.push("/channels");
     },
     onError: () => {
       toast.error("error registering user");

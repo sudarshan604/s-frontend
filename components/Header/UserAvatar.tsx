@@ -32,7 +32,7 @@ const UserAvatar = () => {
       >
         <Avvvatars value={data?.name} size={18} />
         <BodyBase fontWeight="regular" FontSize="body" className="">
-          {data.name}
+          {data?.name}
         </BodyBase>
       </Button>
       {isLogoClick && (

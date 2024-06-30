@@ -60,3 +60,10 @@ export const useSavePlatFormfacebook = () => {
     },
   });
 };
+
+export const useDeleteFacebookDetail = () => {
+  const httpService = new apiClients("/facebook/fb-delete");
+  return useMutation({
+    mutationFn: httpService.delete,
+  });
+};

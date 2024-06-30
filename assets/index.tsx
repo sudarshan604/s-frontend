@@ -2,6 +2,7 @@ import React from "react";
 import LoveIcon from "./love";
 import CommentIcon from "./comment";
 import ChevronIcon from "./chevron";
+import VerticalIcon from "./verticalicon";
 
 export interface IconProps {
   width?: number | string;
@@ -11,7 +12,7 @@ export interface IconProps {
   strokeWidth?: string | number;
 }
 type _IconProps = IconProps & {
-  type: "loveIcon" | "commentIcon" | "chevrondown";
+  type: "loveIcon" | "commentIcon" | "chevrondown" | "verticalIcon";
 };
 
 const Icon = ({ type, color, ...rest }: _IconProps) => {
@@ -24,6 +25,7 @@ const Icon = ({ type, color, ...rest }: _IconProps) => {
           loveIcon: <LoveIcon color={color} {...rest} />,
           commentIcon: <CommentIcon color={color} {...rest} />,
           chevrondown: <ChevronIcon color={color} {...rest} />,
+          verticalIcon: <VerticalIcon color={color} {...rest} />,
         }[type]
       }
     </React.Fragment>

@@ -40,7 +40,7 @@ const UploadImage = ({
             </button>
             &nbsp;
             <button onClick={onImageRemoveAll}>Remove all</button>
-            {imageList.map((image, index) => (
+            {imageList?.map((image, index) => (
               <div key={index} className="image-item">
                 <Image
                   src={image["data_url"]}

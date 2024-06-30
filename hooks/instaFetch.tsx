@@ -32,6 +32,13 @@ export interface InstagramUserInterface {
   biography: string;
   __v: number;
 }
+interface FacebookProfile {
+  id: string;
+  key: string;
+  name: string;
+  profile_picture_url: string;
+  tokenId: string;
+}
 
 export const useGetInstaUser = () => {
   const httpService = new apiClients<InstagramUserInterface>(
@@ -97,9 +104,18 @@ export const useSavePlatForm = () => {
 };
 
 export const useConnectedMedia = () => {
-  const httpService = new apiClients<any>("/platform/connected-media");
-  return useQuery({
+  const httpService = new apiClients<FacebookProfile>(
+    "/platform/connected-media"
+  );
+  return useQuery<FacebookProfile[]>({
     queryKey: ["connected-media"],
     queryFn: httpService.get,
+  });
+};
+
+export const useDeleteInstaDetail = () => {
+  const httpService = new apiClients("/insta/insta-delete");
+  return useMutation({
+    mutationFn: httpService.delete,
   });
 };

@@ -17,18 +17,22 @@ import { useFileUpload } from "@/hooks/platform";
 export const schema = z.object({
   instagram: z.boolean().optional(),
   facebook: z.boolean().optional(),
+  youtube: z.boolean().optional(),
   caption: z.string().min(3).max(100),
 });
 
 export type FormData = z.infer<typeof schema>;
 
 const ImageUpload = () => {
-  const [uploadFile, setUploadFIle] = React.useState<
+  const [uploadFile, setUploadFile] = React.useState<
     {
-      data_url: string;
-      file: File;
+      data_url?: string;
+      file?: File;
+      baseString?: string;
+      from?: string;
     }[]
   >([]);
+  const [mediaType, setMediaType] = React.useState<"image" | "video">("image"); // State to manage media type
 
   const { mutate } = useFileUpload();
   const {
@@ -40,41 +44,75 @@ const ImageUpload = () => {
   const { setScheduleData } = usePostShedule();
 
   const onSubmit = async (data: FormData) => {
-    setScheduleData({ uploadFile, ...data, from: "video" });
+    // console.log(data);
+    setScheduleData({ uploadFile, ...data, from: uploadFile.from });
   };
 
   return (
-    <section className="border border-gray-600">
+    <section className="">
       <Heading FontSize="heading2" level={2}>
         Create Post
       </Heading>
       <Form handleSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-x-2">
-          <TextInput
-            name="instagram"
-            register={register}
-            type="checkbox"
-            label="instagram"
-          />
-          <TextInput
-            name="facebook"
-            register={register}
-            type="checkbox"
-            label="facebook"
-          />
+          {mediaType === "image" && (
+            <>
+              <TextInput
+                name="instagram"
+                register={register}
+                type="checkbox"
+                label="instagram"
+              />
+              <TextInput
+                name="facebook"
+                register={register}
+                type="checkbox"
+                label="facebook"
+              />
+            </>
+          )}
+
+          {mediaType !== "image" && (
+            <TextInput
+              name="youtube"
+              register={register}
+              type="checkbox"
+              label="youtube"
+            />
+          )}
         </div>
         <textarea className="w-full min-h-72 h-1/2" {...register("caption")} />
-        {/* <UploadImage
-          images={uploadFile}
-          onChange={(imageList, addUpdateIndex) => setUploadFIle(imageList)}
-        /> */}
-        <UploadVideo onChange={(file) => setUploadFIle(file)} />
+
+        <div className="my-4">
+          <Button
+            onClick={() => setMediaType("image")}
+            className={`mr-2 ${mediaType === "image" ? "bg-gray-300" : ""}`}
+          >
+            Upload Image
+          </Button>
+          <Button
+            onClick={() => setMediaType("video")}
+            className={`${mediaType === "video" ? "bg-gray-300" : ""}`}
+          >
+            Upload Video
+          </Button>
+        </div>
+
+        {mediaType === "image" ? (
+          <UploadImage
+            images={uploadFile}
+            onChange={(imageList, addUpdateIndex) => setUploadFile(imageList)}
+          />
+        ) : (
+          <UploadVideo onChange={(file) => setUploadFile(file)} />
+        )}
+
         <footer>
           <h2>shedule time</h2>
         </footer>
         <div className="mt-4 w-fit mx-auto">
           <Button
-            className="border border-red-500 mt-6"
+            className="border mt-6"
             impact="bold"
             tone="default"
             shape="rounded"

@@ -18,7 +18,10 @@ const UploadVideo = ({ onChange }: { onChange: (uploadedFile) => void }) => {
 
     reader.onload = () => {
       const base64String = reader.result as string;
-      console.log("Base64 String: ", base64String);
+      onChange({
+        baseString: base64String,
+        from: "video",
+      });
     };
 
     reader.readAsDataURL(uploadedFile);
@@ -31,7 +34,6 @@ const UploadVideo = ({ onChange }: { onChange: (uploadedFile) => void }) => {
     //   }
     // );
 
-    onChange(formData);
     if (uploadedFile) {
       const videoURL = URL.createObjectURL(uploadedFile);
       setVideoSrc(videoURL);

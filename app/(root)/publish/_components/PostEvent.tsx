@@ -26,7 +26,7 @@ const PostEvent = ({ data }: PostEventInterface) => {
 
         return (
           <div
-            className="flex justify-between items-center bg-red-400"
+            className="flex justify-between  items-center bg-red-400"
             key={item.key}
           >
             <Image

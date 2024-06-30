@@ -37,7 +37,7 @@ export const BodyBase: React.FC<DefaultProps> = ({
   return (
     <BodyBase
       className={
-        (cx(className, WeightClasses[fontWeight]), FontSizeClasses[FontSize])
+        (cx(WeightClasses[fontWeight]), FontSizeClasses[FontSize], className)
       }
       {...props}
     >

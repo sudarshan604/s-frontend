@@ -33,6 +33,12 @@ const nextConfig = {
         hostname: "scontent.fktm10-1.fna.fbcdn.net",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "z-p3-scontent.fktm2-2.fna.fbcdn.net",
+
+        pathname: "**",
+      },
     ],
   },
 };

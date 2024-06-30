@@ -57,13 +57,16 @@ const CustomCalender = ({
   }, [isSuccess]);
 
   useEffect(() => {
-    mutate({ file: shedule.schedule.uploadFile });
-    if (shedule.schedule.uploadFile[0] !== undefined) {
-      const mediaType =
+    if (
+      shedule.schedule.uploadFile[0] !== undefined ||
+      shedule.schedule.uploadFile.baseString !== undefined
+    ) {
+      const mediaUrl =
         shedule.schedule.from === "video"
-          ? shedule.schedule.uploadFile[0]
+          ? shedule.schedule.uploadFile.baseString
           : shedule.schedule.uploadFile[0]?.data_url;
 
+      mutate({ file: mediaUrl, mediaType: shedule.schedule.from || "image" });
       showModel(false);
       shedule.setScheduleData({ uploadFile: [] });
     }
@@ -81,8 +84,7 @@ const CustomCalender = ({
         .filter(([key, value]) => Array.isArray(value))
         .map(([key, value]) => ({ key, value }));
 
-      // return <PostEvent data={arrayEntries} />;
-      return;
+      return <PostEvent data={arrayEntries} />;
     },
   };
 

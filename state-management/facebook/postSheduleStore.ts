@@ -3,11 +3,13 @@ import { create } from "zustand";
 interface Schedule {
   instagram: any;
   facebook: any;
+  youtube: any;
   caption: string;
   from: string;
   uploadFile: {
-    data_url: string;
-    file: File;
+    data_url?: string;
+    file?: File;
+    baseString?: string;
   }[];
 }
 
@@ -18,6 +20,7 @@ interface PageInterface {
   setScheduleData: (data: {
     caption?: string;
     facebook?: boolean;
+    youtube?: boolean;
     from: string;
     instagram?: boolean;
     uploadFile?: {
@@ -33,6 +36,7 @@ const usePostSchedule = create<PageInterface>((set) => ({
     caption: "",
     facebook: "",
     instagram: "",
+    youtube: "",
     from: "",
     uploadFile: [],
   },
@@ -49,6 +53,8 @@ const usePostSchedule = create<PageInterface>((set) => ({
           data.instagram !== undefined
             ? data.instagram
             : state.schedule.instagram,
+        youtube:
+          data.youtube !== undefined ? data.youtube : state.schedule.youtube,
         caption:
           data.caption !== undefined ? data.caption : state.schedule.caption,
         uploadFile:
