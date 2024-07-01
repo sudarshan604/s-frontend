@@ -1,6 +1,6 @@
 import apiClients from "@/services/http-service";
 
-import { MetaCredentialInterface } from "./instaFetch";
+import { MetaCredentialInterface, useConnectedMedia } from "./instaFetch";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -62,8 +62,12 @@ export const useSavePlatFormfacebook = () => {
 };
 
 export const useDeleteFacebookDetail = () => {
+  const { refetch } = useConnectedMedia();
   const httpService = new apiClients("/facebook/fb-delete");
   return useMutation({
     mutationFn: httpService.delete,
+    onSuccess: () => {
+      refetch();
+    },
   });
 };

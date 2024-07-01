@@ -114,8 +114,12 @@ export const useConnectedMedia = () => {
 };
 
 export const useDeleteInstaDetail = () => {
+  const { refetch } = useConnectedMedia();
   const httpService = new apiClients("/insta/insta-delete");
   return useMutation({
     mutationFn: httpService.delete,
+    onSuccess: () => {
+      refetch();
+    },
   });
 };
