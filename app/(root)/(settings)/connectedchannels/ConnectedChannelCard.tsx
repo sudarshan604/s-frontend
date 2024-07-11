@@ -64,7 +64,10 @@ const ChannelCard = () => {
                   width={48}
                 />
               </button>
-              <Tooltip className="absolute -right-14 bottom-1/2 translate-y-1/2 flex flex-col gap-y-2">
+              <Tooltip
+                isTooKipOpen={showToolkip}
+                className="absolute -right-14 bottom-1/2 translate-y-1/2 flex flex-col gap-y-2"
+              >
                 <Button
                   size={"small"}
                   impact={"none"}

@@ -1,8 +1,14 @@
 "use client";
 import React from "react";
-import Analyze from "./_components/Analyze";
+import Analyze from "./__components/Analyze";
 
-const page = () => {
+const page = ({
+  searchParams,
+}: {
+  searchParams: {
+    key: string;
+  };
+}) => {
   return (
     <div>
       <Analyze />

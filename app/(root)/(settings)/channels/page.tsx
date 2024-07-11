@@ -26,6 +26,7 @@ const Page = () => {
   const { mutate: saveFacebookToken, isSuccess: isFacebookTokenSaveSuccess } =
     useSavePlatFormfacebook();
   const { login: loginWithGoogle } = useLoginWithGoogle();
+
   const httpService = new apiClients<SheduleInterface>("/tiktok/qauth");
 
   const { mutate: tiktokMutate } = useMutation({

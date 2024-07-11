@@ -44,7 +44,6 @@ const ImageUpload = () => {
   const { setScheduleData } = usePostShedule();
 
   const onSubmit = async (data: FormData) => {
-    // console.log(data);
     setScheduleData({ uploadFile, ...data, from: uploadFile.from });
   };
 

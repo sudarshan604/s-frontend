@@ -46,7 +46,6 @@ export const useSaveYoutubeToken = () => {
   return useMutation({
     mutationFn: httpService.create,
     onSuccess: () => {
-      console.log("save yt");
       mutate({});
     },
     onError: (error) => {

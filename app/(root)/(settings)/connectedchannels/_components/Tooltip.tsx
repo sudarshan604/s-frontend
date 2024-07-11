@@ -3,11 +3,16 @@ import { cx } from "@/utils";
 const Tooltip = ({
   children,
   className,
+  isTooKipOpen,
 }: {
   children: React.ReactNode;
   className: string;
+  isTooKipOpen: boolean;
 }) => {
-  return <div className={cx("bg-white", className)}>{children}</div>;
+  if (!isTooKipOpen) return;
+  return (
+    <div className={cx("bg-white shadow-custom", className)}>{children}</div>
+  );
 };
 
 export default Tooltip;
