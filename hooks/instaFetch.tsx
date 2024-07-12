@@ -1,5 +1,6 @@
 import apiClients from "@/services/http-service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export interface MetaCredentialInterface {
   accessToken: string;
@@ -120,6 +121,10 @@ export const useDeleteInstaDetail = () => {
     mutationFn: httpService.delete,
     onSuccess: () => {
       refetch();
+      toast.success("insta disconnect successfully");
+    },
+    onError: () => {
+      toast.error("insta disconnect fail");
     },
   });
 };

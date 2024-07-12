@@ -68,6 +68,10 @@ export const useDeleteFacebookDetail = () => {
     mutationFn: httpService.delete,
     onSuccess: () => {
       refetch();
+      toast.success("Facebook page disconnect succefully");
+    },
+    onError: (err) => {
+      toast.error("Error disconnecting facebook page ");
     },
   });
 };

@@ -11,12 +11,19 @@ import { BodyBase } from "@/components/typography/BodyBase";
 import Link from "next/link";
 import { schema } from "@/app/(auth)/signin/page";
 import { FormData } from "@/app/(auth)/signin/page";
+import { toast } from "react-toastify";
 
 const httpService = new apiClients("/users/update-password");
 
 const Page = () => {
   const { mutate } = useMutation({
     mutationFn: httpService.create,
+    onSuccess: () => {
+      toast.success("update password successfully");
+    },
+    onError: () => {
+      toast.error("error updating password");
+    },
   });
   const {
     register,
@@ -25,8 +32,10 @@ const Page = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FormData) => {
+    console.log("data=", data);
     mutate(data);
   };
+  console.log(errors);
   return (
     <section className="min-w-full bg-primary-100">
       <Form

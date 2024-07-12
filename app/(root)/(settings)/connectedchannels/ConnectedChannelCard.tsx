@@ -11,7 +11,7 @@ import { useDeleteFacebookDetail } from "@/hooks/facebookapi";
 
 const ChannelCard = () => {
   const { data } = useConnectedMedia();
-  const [showToolkip, setShowToolTip] = useState(false);
+  const [showToolkip, setShowToolTip] = useState("");
 
   const { mutate: deleteInsta } = useDeleteInstaDetail();
 
@@ -55,7 +55,7 @@ const ChannelCard = () => {
             </div>
             <div className="relative">
               <button
-                onClick={() => setShowToolTip(!showToolkip)}
+                onClick={() => setShowToolTip(item.name)}
                 className="focus:outline-none"
               >
                 <Icon
@@ -65,7 +65,7 @@ const ChannelCard = () => {
                 />
               </button>
               <Tooltip
-                isTooKipOpen={showToolkip}
+                isTooKipOpen={showToolkip === item.name}
                 className="absolute -right-14 bottom-1/2 translate-y-1/2 flex flex-col gap-y-2"
               >
                 <Button
