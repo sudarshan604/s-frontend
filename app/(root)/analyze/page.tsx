@@ -11,7 +11,7 @@ const page = ({
 }) => {
   return (
     <div>
-      <Analyze />
+      <Analyze media={searchParams.key} />
     </div>
   );
 };

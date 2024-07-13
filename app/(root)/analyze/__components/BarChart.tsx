@@ -22,17 +22,11 @@ interface PropsInterface {
   id: string;
 }
 const BarCharts = ({ data }: { data: PropsInterface }) => {
-  function formatDate(dateStr: string) {
-    const date = new Date(dateStr);
-    const options = { month: "short", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  }
   const formattedData = data?.values.map((item) => ({
     ...item,
     end_time: formatDate(item.end_time),
   }));
 
-  console.log(formattedData);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -63,3 +57,9 @@ const BarCharts = ({ data }: { data: PropsInterface }) => {
 };
 
 export default BarCharts;
+
+export function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const options = { month: "short", day: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+}

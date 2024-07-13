@@ -39,6 +39,7 @@ interface FacebookProfile {
   name: string;
   profile_picture_url: string;
   tokenId: string;
+  accessToken: string;
 }
 
 export const useGetInstaUser = () => {

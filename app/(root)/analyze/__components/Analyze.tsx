@@ -1,32 +1,46 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import BarChartS from "./BarChart";
 import { BodyBase } from "@/components/typography/BodyBase";
-import { useConnectedMedia, useGetInstaUser } from "@/hooks/instaFetch";
-import { useGetUserPlatForm } from "@/utils/Auth";
+import { useConnectedMedia } from "@/hooks/instaFetch";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import BarChartS from "./BarChart";
+import AreaCharts from "./AreaCharts";
+import { InsightMetrics } from "@/constant/constant";
 
-const Analyze = () => {
+const Analyze = ({ media }: { media: string }) => {
   const [selectedMetric, SetSelectedMetric] = useState("");
   const [metricData, setMetricData] = useState();
-  // const { data } = useGetInstaUser();
-  // const { data } = useConnectedMedia();
-  const { data } = useGetUserPlatForm();
+  const [token, setToken] = useState("");
+  const { data } = useConnectedMedia();
+
+  useEffect(() => {
+    const item = data?.find((item) => item.key === media?.toLocaleLowerCase());
+    const token = item?.accessToken;
+    setToken(token);
+  }, [media, data]);
 
   const fetchMetric = async () => {
-    const url = `https://graph.facebook.com/v20.0/17841447341358804/insights?metric=${selectedMetric}&period=days_28&since=2024-06-01T00:00:00Z&until=2024-06-30T23:59:59Z&access_token=EAAFKmWPjmZCQBO1a4cBvD0ZBWI9k7bSlYaU7HUeTkTVhjT3XdHysORNZBfvn08LnyoSzbIFZBxhNh3MzILI0GvuNcpMf1ib6kXRDAnIoqrzMRHN0QNoXaSLmtWYlQZBKnOWUk8XP26UBjmzWKdbh6CqJmmKeCDZAY12KBhaEGtbB5MZBj9AVmfxCxPt3w9meCbZB7tfrLS6IQpzEHEZBG2gZDZD`;
+    const url = `https://graph.facebook.com/v20.0/17841447341358804/insights?metric=${selectedMetric}&period=day&since=2024-06-01T00:00:00Z&until=2024-06-30T23:59:59Z&access_token=${token}`;
 
     const response = await axios.get(url);
     const data = response.data;
     setMetricData(data.data[0]);
-    SetSelectedMetric("");
+    // SetSelectedMetric("");
+  };
+
+  const fetchMetricFacebook = async () => {
+    const url = `https://graph.facebook.com/v13.0/341388352389657/insights?metric=${selectedMetric}&access_token=${token}&since=2024-06-01T00:00:00Z&until=2024-06-30T23:59:59Z`;
+    const response = await axios.get(url);
+    const data = response.data;
+    console.log("data-", data);
+    setMetricData(data.data[0]);
+    // SetSelectedMetric("");
   };
 
   useEffect(() => {
-    if (selectedMetric) fetchMetric();
-  }, [selectedMetric]);
-
-  console.log(metricData);
+    if (selectedMetric && media === "Instagram") fetchMetric();
+    if (selectedMetric && media === "Facebook") fetchMetricFacebook();
+  }, [selectedMetric, media]);
 
   return (
     <div className=" h-96">
@@ -39,11 +53,19 @@ const Analyze = () => {
             SetSelectedMetric(e.target.value);
           }}
         >
-          <option value="reach">reach</option>
-          <option value="impressions">impressions</option>
+          {InsightMetrics.map((item) => {
+            return (
+              item.platform == media?.toLocaleLowerCase() && (
+                <option key={item.key + item.platform} value={item.key}>
+                  {item.label}
+                </option>
+              )
+            );
+          })}
         </select>
       </div>
-      <BarChartS data={metricData} />
+      {selectedMetric !== "page_fans" && <BarChartS data={metricData} />}
+      {selectedMetric === "page_fans" && <AreaCharts data={metricData} />}
     </div>
   );
 };
