@@ -36,9 +36,9 @@ const ChannelSidebar = () => {
             <li
               className={`${
                 pathname === item.href
-                  ? "bg-primary-400 text-white "
-                  : "hover:bg-primary-100"
-              } px-2 py-2`}
+                  ? " text-primary-100 "
+                  : "hover:bg-primary-100 hover:pl-9 hover:transition-all hover:duration-300 hover:ease-in-out"
+              }  py-2 pl-6`}
               key={item.label}
             >
               <Link href={item.href}>

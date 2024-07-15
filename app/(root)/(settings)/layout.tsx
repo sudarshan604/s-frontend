@@ -7,8 +7,8 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <section className="pt-3 ml-6 flex min-h-full   border-r">
-        <div className="w-1/5 pr-6 border-r min-h-full  ">
+      <section className="pt-3  flex min-h-full border-r">
+        <div className="w-1/5  border-r min-h-full  ">
           <ChannelSidebar />
         </div>
         <div className="w-4/5 pl-6">{children}</div>

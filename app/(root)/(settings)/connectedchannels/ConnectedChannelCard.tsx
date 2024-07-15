@@ -13,7 +13,7 @@ const ChannelCard = () => {
   const { data } = useConnectedMedia();
   const [showToolkip, setShowToolTip] = useState("");
 
-  const { mutate: deleteInsta } = useDeleteInstaDetail();
+  const { mutate: deleteInsta, isPending } = useDeleteInstaDetail();
 
   const { mutate: deleteFacebook } = useDeleteFacebookDetail();
 
@@ -66,7 +66,7 @@ const ChannelCard = () => {
               </button>
               <Tooltip
                 isTooKipOpen={showToolkip === item.name}
-                className="absolute -right-14 bottom-1/2 translate-y-1/2 flex flex-col gap-y-2"
+                className="absolute -right-12 bottom-1/2 translate-y-1/2 flex flex-col gap-y-2 px-3 py-2"
               >
                 <Button
                   size={"small"}
@@ -75,7 +75,7 @@ const ChannelCard = () => {
                   tone={"danger"}
                   onClick={() => onDelete(item.key)}
                 >
-                  delete
+                  {isPending ? "loading" : "delete"}
                 </Button>
                 <Button
                   size={"small"}

@@ -1,7 +1,11 @@
 import React from "react";
 import ConnectedChannelCard from "./ConnectedChannelCard";
 const page = () => {
-  return <ConnectedChannelCard />;
+  return (
+    <section className="">
+      <ConnectedChannelCard />;
+    </section>
+  );
 };
 
 export default page;
