@@ -16,7 +16,7 @@ const WeightClasses: Record<DefaultProps["fontWeight"], string> = {
   medium: "font-semibold",
   regular: "font-normal",
 };
-const FontSizeClasses: Record<DefaultProps["FontSize"], string> = {
+const FontSizeClasses: Partial<Record<DefaultProps["FontSize"], string>> = {
   body: "text-[1.25rem]",
   bodyS: "text-base",
   bodyXS: "text-[0.9rem]",
@@ -30,7 +30,7 @@ export const BodyBase: React.FC<DefaultProps> = ({
   children,
   FontSize = "bodyS",
   className = "",
-  ...props
+  ...rest
 }) => {
   const BodyBase = type;
 
@@ -39,7 +39,7 @@ export const BodyBase: React.FC<DefaultProps> = ({
       className={
         (cx(WeightClasses[fontWeight]), FontSizeClasses[FontSize], className)
       }
-      {...props}
+      {...rest}
     >
       {children}
     </BodyBase>

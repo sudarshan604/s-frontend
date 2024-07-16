@@ -2,21 +2,36 @@ import { BodyBase } from "@/components/typography/BodyBase";
 import React, { useState } from "react";
 
 const DateSelect = () => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState({
+    label: "",
+    isOpen: false,
+  });
   return (
-    <div className="shadow-custom px-2 py-3 cursor-pointer">
+    <div
+      onClick={() => {
+        setSelectedValue((prevData) => {
+          return {
+            ...prevData,
+            isOpen: !prevData.isOpen,
+          };
+        });
+      }}
+      className="shadow-custom px-3 py-3 cursor-pointer rounded-md "
+    >
       Current Month
-      <div>
-        <BodyBase className={""} fontWeight={"bold"}>
-          last month
-        </BodyBase>
-        <BodyBase className={""} fontWeight={"bold"}>
-          this Month
-        </BodyBase>
-        <BodyBase className={""} fontWeight={"bold"}>
-          customize
-        </BodyBase>
-      </div>
+      {selectedValue.isOpen && (
+        <div>
+          <BodyBase className={""} fontWeight={"bold"}>
+            last month
+          </BodyBase>
+          <BodyBase className={""} fontWeight={"bold"}>
+            this Month
+          </BodyBase>
+          <BodyBase className={""} fontWeight={"bold"}>
+            customize
+          </BodyBase>
+        </div>
+      )}
     </div>
   );
 };
