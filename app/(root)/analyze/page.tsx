@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Analyze from "./__components/Analyze";
-
+import DateSelect from "./__components/DateSelect";
 const page = ({
   searchParams,
 }: {
@@ -10,9 +10,13 @@ const page = ({
   };
 }) => {
   return (
-    <div>
+    <section className="flex flex-col gap-y-32">
+      <div className="self-end">
+        <DateSelect />
+      </div>
+
       <Analyze media={searchParams.key} />
-    </div>
+    </section>
   );
 };
 
