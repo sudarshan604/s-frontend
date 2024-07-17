@@ -6,12 +6,32 @@ import { useEffect, useState } from "react";
 import BarChartS from "./BarChart";
 import AreaCharts from "./AreaCharts";
 import { InsightMetrics } from "@/constant/constant";
+import { getCurrentMonthRange, getLastMonthRange } from "@/utils/formatdate";
 
-const Analyze = ({ media }: { media: string }) => {
+const Analyze = ({
+  media,
+  selectedDate,
+}: {
+  media: string;
+  selectedDate: string;
+}) => {
   const [selectedMetric, SetSelectedMetric] = useState("");
+  const [selectedMetricDate, setSelectedMetricDate] = useState<{
+    since: string;
+    until: string;
+  }>(getCurrentMonthRange());
   const [metricData, setMetricData] = useState();
   const [token, setToken] = useState("");
   const { data } = useConnectedMedia();
+
+  useEffect(() => {
+    if (selectedDate.toLocaleLowerCase() === "current month") {
+      setSelectedMetricDate(getCurrentMonthRange());
+    }
+    if (selectedDate.toLocaleLowerCase() === "last month") {
+      setSelectedMetricDate(getLastMonthRange());
+    }
+  }, [selectedDate]);
 
   useEffect(() => {
     const item = data?.find((item) => item.key === media?.toLocaleLowerCase());
@@ -20,7 +40,7 @@ const Analyze = ({ media }: { media: string }) => {
   }, [media, data]);
 
   const fetchMetric = async () => {
-    const url = `https://graph.facebook.com/v20.0/17841447341358804/insights?metric=${selectedMetric}&period=day&since=2024-06-01T00:00:00Z&until=2024-06-30T23:59:59Z&access_token=${token}`;
+    const url = `https://graph.facebook.com/v20.0/17841447341358804/insights?metric=${selectedMetric}&period=day&since=${selectedMetricDate.since}&until=${selectedMetricDate.until}&access_token=${token}`;
 
     const response = await axios.get(url);
     const data = response.data;
@@ -40,7 +60,7 @@ const Analyze = ({ media }: { media: string }) => {
   useEffect(() => {
     if (selectedMetric && media === "Instagram") fetchMetric();
     if (selectedMetric && media === "Facebook") fetchMetricFacebook();
-  }, [selectedMetric, media]);
+  }, [selectedMetric, media, selectedDate]);
 
   return (
     <div className=" h-96">

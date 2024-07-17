@@ -1,23 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import Analyze from "./__components/Analyze";
-import DateSelect from "./__components/DateSelect";
-const page = ({
+import AnalyzeWrapper from "./__components/AnalyzeWrapper";
+const Page = ({
   searchParams,
 }: {
   searchParams: {
     key: string;
   };
 }) => {
-  return (
-    <section className="flex flex-col gap-y-32">
-      <div className="self-end">
-        <DateSelect />
-      </div>
-
-      <Analyze media={searchParams.key} />
-    </section>
-  );
+  console.log("kesy=", searchParams.key);
+  return <AnalyzeWrapper key={searchParams.key} />;
 };
 
-export default page;
+export default Page;

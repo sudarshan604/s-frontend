@@ -1,11 +1,18 @@
+"use client";
 import { BodyBase } from "@/components/typography/BodyBase";
 import React, { useState } from "react";
 
-const DateSelect = () => {
+interface DateSelectProps {
+  selectedDate: string;
+  onClick: (value: string) => void;
+}
+
+const DateSelect = ({ selectedDate, onClick }: DateSelectProps) => {
   const [selectedValue, setSelectedValue] = useState({
     label: "",
     isOpen: false,
   });
+
   return (
     <div
       onClick={() => {
@@ -18,16 +25,28 @@ const DateSelect = () => {
       }}
       className="shadow-custom px-3 py-3 cursor-pointer rounded-md "
     >
-      Current Month
+      {selectedDate}
       {selectedValue.isOpen && (
         <div>
-          <BodyBase className={""} fontWeight={"bold"}>
+          <BodyBase
+            className={""}
+            fontWeight={"bold"}
+            onClick={() => onClick("last month")}
+          >
             last month
           </BodyBase>
-          <BodyBase className={""} fontWeight={"bold"}>
-            this Month
+          <BodyBase
+            className={""}
+            fontWeight={"bold"}
+            onClick={() => onClick("Current Month")}
+          >
+            Current Month
           </BodyBase>
-          <BodyBase className={""} fontWeight={"bold"}>
+          <BodyBase
+            className={""}
+            fontWeight={"bold"}
+            onClick={() => onClick("Customize")}
+          >
             customize
           </BodyBase>
         </div>

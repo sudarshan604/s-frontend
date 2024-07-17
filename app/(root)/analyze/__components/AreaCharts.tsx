@@ -12,7 +12,6 @@ import {
 import { formatDate } from "./BarChart";
 
 const AreaCharts = ({ data }: { data: any }) => {
-  console.log("data=", data);
   const formattedData = data?.values.map((item) => ({
     ...item,
     end_time: formatDate(item.end_time),
