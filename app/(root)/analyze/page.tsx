@@ -7,8 +7,7 @@ const Page = ({
     key: string;
   };
 }) => {
-  console.log("kesy=", searchParams.key);
-  return <AnalyzeWrapper key={searchParams.key} />;
+  return <AnalyzeWrapper key={searchParams} />;
 };
 
 export default Page;

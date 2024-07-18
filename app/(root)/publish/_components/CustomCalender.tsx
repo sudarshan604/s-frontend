@@ -83,8 +83,7 @@ const CustomCalender = ({
       const arrayEntries = Object.entries(event)
         .filter(([key, value]) => Array.isArray(value))
         .map(([key, value]) => ({ key, value }));
-
-      return <PostEvent data={arrayEntries} />;
+      return <PostEvent data={arrayEntries} id={event._id} />;
     },
   };
 

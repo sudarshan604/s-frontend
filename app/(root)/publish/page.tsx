@@ -13,7 +13,7 @@ const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className="pb-12">
       <CustomCalender showModel={(isOpen) => setShowModal(isOpen)} />
       <Modal
         title="Connect to the facebook Page"

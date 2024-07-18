@@ -11,9 +11,11 @@ import { getCurrentMonthRange, getLastMonthRange } from "@/utils/formatdate";
 const Analyze = ({
   media,
   selectedDate,
+  customDate,
 }: {
   media: string;
   selectedDate: string;
+  customDate: Array<string>;
 }) => {
   const [selectedMetric, SetSelectedMetric] = useState("");
   const [selectedMetricDate, setSelectedMetricDate] = useState<{
@@ -49,7 +51,7 @@ const Analyze = ({
   };
 
   const fetchMetricFacebook = async () => {
-    const url = `https://graph.facebook.com/v13.0/341388352389657/insights?metric=${selectedMetric}&access_token=${token}&since=2024-06-01T00:00:00Z&until=2024-06-30T23:59:59Z`;
+    const url = `https://graph.facebook.com/v13.0/341388352389657/insights?metric=${selectedMetric}&access_token=${token}&since=${selectedMetricDate.since}&until=${selectedMetricDate.until}`;
     const response = await axios.get(url);
     const data = response.data;
     console.log("data-", data);

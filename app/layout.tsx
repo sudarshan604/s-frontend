@@ -8,6 +8,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-calendar/dist/Calendar.css";
+//
+import "react-circular-progressbar/dist/styles.css";
 
 import QueryClientProvider from "./QueryClientProvider";
 const inter = Inter({ subsets: ["latin"] });

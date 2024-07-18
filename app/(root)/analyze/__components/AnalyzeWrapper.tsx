@@ -2,21 +2,39 @@
 import React, { useState } from "react";
 import Analyze from "./Analyze";
 import DateSelect from "./DateSelect";
-
-const AnalyzeWrapper = ({ key }: { key: string }) => {
+import Calendar from "react-calendar";
+const AnalyzeWrapper = (key) => {
   const [selectedDate, setSelectedDate] = useState("Current Month");
+  const [customDate, setCustomDate] = useState<any>("");
 
-  console.log("key=", key);
   return (
-    <section className="flex flex-col gap-y-32">
-      <div className="self-end">
-        <DateSelect
-          selectedDate={selectedDate}
-          onClick={(value) => setSelectedDate(value)}
-        />
+    <section className="flex  flex-col gap-y-48">
+      <div className="relative border border-red-50">
+        <div className="self-end absolute right-0 z-10">
+          <DateSelect
+            selectedDate={selectedDate}
+            onClick={(value) => {
+              setCustomDate("");
+              setSelectedDate(value);
+            }}
+          />
+
+          {!customDate && selectedDate.toLocaleLowerCase() === "customize" && (
+            <Calendar
+              selectRange
+              showDoubleView
+              onChange={setCustomDate}
+              value={customDate}
+            />
+          )}
+        </div>
       </div>
 
-      <Analyze media={"Instagram"} selectedDate={selectedDate} />
+      <Analyze
+        media={"Facebook"}
+        selectedDate={selectedDate}
+        customDate={customDate}
+      />
     </section>
   );
 };
