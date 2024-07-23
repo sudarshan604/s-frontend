@@ -2,6 +2,7 @@
 import Button from "@/components/shared/Button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -9,7 +10,14 @@ const Page = () => {
   return (
     <main className="h-full   bg-[#333] text-white ">
       <nav className="max-w-7xl mx-auto ">
-        <h1 className="text-2xl pt-4">SocialNexus</h1>
+        <h1 className="text-2xl pt-4">
+          <Image
+            src={"/assets/images/slogo.svg"}
+            alt={"logo"}
+            width={98}
+            height={98}
+          />
+        </h1>
       </nav>
       <section className="max-w-7xl mx-auto h-5/6 flex items-center gap-x-8  ">
         <div className="flex flex-col w-[60%] gap-y-6">
