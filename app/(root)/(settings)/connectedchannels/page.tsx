@@ -3,7 +3,7 @@ import ConnectedChannelCard from "./ConnectedChannelCard";
 const page = () => {
   return (
     <section className="">
-      <ConnectedChannelCard />;
+      <ConnectedChannelCard />
     </section>
   );
 };

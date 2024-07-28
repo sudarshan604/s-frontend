@@ -32,7 +32,6 @@ const Page = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = (data: FormData) => {
-    console.log("data=", data);
     mutate(data);
   };
   console.log(errors);

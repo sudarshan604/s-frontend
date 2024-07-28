@@ -1,5 +1,10 @@
-"use client";
-import AnalyzeWrapper from "./__components/AnalyzeWrapper";
+import dynamic from "next/dynamic";
+
+// Dynamically import AnalyzeWrapper as a client-side component
+const AnalyzeWrapper = dynamic(() => import("./__components/AnalyzeWrapper"), {
+  ssr: false,
+});
+
 const Page = ({
   searchParams,
 }: {
@@ -7,7 +12,7 @@ const Page = ({
     key: string;
   };
 }) => {
-  return <AnalyzeWrapper key={searchParams} />;
+  return <AnalyzeWrapper searchParams={searchParams} />;
 };
 
 export default Page;

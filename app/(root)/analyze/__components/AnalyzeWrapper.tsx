@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import Analyze from "./Analyze";
 import DateSelect from "./DateSelect";
 import Calendar from "react-calendar";
-const AnalyzeWrapper = (key) => {
+const AnalyzeWrapper = ({
+  searchParams,
+}: {
+  searchParams: { key: string };
+}) => {
   const [selectedDate, setSelectedDate] = useState("Current Month");
   const [customDate, setCustomDate] = useState<any>("");
 
@@ -31,7 +35,7 @@ const AnalyzeWrapper = (key) => {
       </div>
 
       <Analyze
-        media={"Facebook"}
+        media={searchParams.key}
         selectedDate={selectedDate}
         customDate={customDate}
       />

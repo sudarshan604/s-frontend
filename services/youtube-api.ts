@@ -2,6 +2,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import apiClients from "./http-service";
 import { useGetUserPlatForm } from "@/utils/Auth";
+import { toast } from "react-toastify";
 
 export interface YoutubeVideoInterface {
   channelId: string;
@@ -29,11 +30,13 @@ export const useGetYoutubeContent = () => {
 
 export const useSaveYoutubeVideo = () => {
   const httpService = new apiClients("/yt/yt-save-content");
+  const { refetch } = useGetUserPlatForm();
 
   return useMutation({
     mutationFn: httpService.create,
     onSettled: (data, erro) => {
       if (data) {
+        refetch();
       }
     },
   });
@@ -65,6 +68,11 @@ export const useLoginWithGoogle = () => {
         code: codeResponse.code,
         platform: "youtube",
       });
+      toast.success("successfully connect youtube");
+    },
+    onError: (err) => {
+      console.log("err=", err);
+      toast.error("error connecting");
     },
     flow: "auth-code",
     scope:

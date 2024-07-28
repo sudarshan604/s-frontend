@@ -24,7 +24,9 @@ const PostEvent = ({ data, id }: PostEventInterface) => {
   return (
     <div>
       {filterdata.map((item) => {
-        const { imgUrl, caption } = item.value[0];
+        const { mediaUrl, caption } = item.value[0];
+
+        console.log("img url=", item);
 
         return (
           <div
@@ -42,7 +44,7 @@ const PostEvent = ({ data, id }: PostEventInterface) => {
             />
 
             <span className="text-sm ">{caption}</span>
-            <Image src={imgUrl!} alt="post" width={24} height={24} />
+            <Image src={mediaUrl!} alt="post" width={24} height={24} />
           </div>
         );
       })}

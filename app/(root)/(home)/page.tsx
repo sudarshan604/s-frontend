@@ -12,7 +12,7 @@ const Page = () => {
       <nav className="max-w-7xl mx-auto ">
         <h1 className="text-2xl pt-4">
           <Image
-            src={"/assets/images/slogo.svg"}
+            src={"/assets/images/slogo.png"}
             alt={"logo"}
             width={98}
             height={98}
