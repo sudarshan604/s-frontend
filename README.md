@@ -1,9 +1,6 @@
 ## Workflow Video:
 
-<video width="320" height="240" controls>
-  <source src="/video/work.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Demo  ](https://drive.google.com/file/d/1mAh8UBMSsqyc6ZR_2Zfy4mdQX6GReFjS/view?usp=sharing)](https://drive.google.com/file/d/1mAh8UBMSsqyc6ZR_2Zfy4mdQX6GReFjS/view?usp=sharing)
 
 # Social Media Management Dashboard (Frontend)
 
