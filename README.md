@@ -1,7 +1,7 @@
 ## Workflow Video:
 
 <video width="320" height="240" controls>
-  <source src="/public/video/work.mp4" type="video/mp4">
+  <source src="/video/work.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -20,6 +20,6 @@ This repository contains the frontend code for the Social Media Management App. 
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/your-username/frontend-repo.git
+   git clone https://github.com/sudarshan604/s-frontend.git
    cd frontend-repo
    ```
