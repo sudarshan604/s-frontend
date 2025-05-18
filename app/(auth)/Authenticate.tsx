@@ -8,13 +8,13 @@ const AuthenticatePage = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { data, isLoading } = useCurrentUser();
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // // }
 
-  if (data) {
-    router.push("/channels");
-  }
+  // if (data) {
+  //   router.push("/channels");
+  // }
 
   return (
     <>

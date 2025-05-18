@@ -96,4 +96,3 @@ const ChannelCard = () => {
 };
 
 export default ChannelCard;
-// export default React.memo(ChannelCard);

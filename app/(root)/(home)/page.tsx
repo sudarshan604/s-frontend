@@ -61,6 +61,7 @@ const Page = () => {
           width={600}
           alt="main"
           className=""
+          priority
         />
       </section>
     </main>

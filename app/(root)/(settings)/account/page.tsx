@@ -34,7 +34,6 @@ const Page = () => {
   const onSubmit = (data: FormData) => {
     mutate(data);
   };
-  console.log(errors);
   return (
     <section className="min-w-full bg-primary-100">
       <Form

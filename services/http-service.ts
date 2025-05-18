@@ -6,6 +6,7 @@ export default class HttpService<T> {
     this.endpoint = endpoint;
   }
   create = async (data: T = {} as T) => {
+    console.log(this.endpoint);
     const res = await apiClients.post<T[]>(this.endpoint, data);
     return res.data;
   };
